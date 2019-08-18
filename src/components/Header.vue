@@ -1,10 +1,5 @@
 <template>
   <div id="header">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div> -->
-
     <div class='navbar-collapsed'>
       <router-link class='nav-logo' to='/'>
         <img alt='icon' src='@/assets/logo.png' />
@@ -27,6 +22,23 @@
         <router-link class='nav-item' to='/about'>About</router-link>
         <router-link class='nav-item' to='/contact'>Contact</router-link>
       </div>
+      <hr class='nav-hr' />
+      <div class='nav-user'>
+        <div v-if='isLoggedIn'>
+          <span v-if='isAdminLoggedIn'>
+            <router-link class='nav-item' to='/admin'>Admin</router-link>
+          </span>
+          <span v-else>
+            <router-link class='nav-item' to='/rentals'>Rentals</router-link>
+          </span>
+          <router-link class='nav-item' to='/profile'>Me</router-link>
+          <span class='nav-item' @click.prevent='logout'>Log out</span>
+        </div>
+        <div v-else>
+          <router-link class='nav-item' to='/signup'>Sign up</router-link>
+          <router-link class='nav-item' to='/login'>Log in</router-link>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -39,9 +51,22 @@ export default {
       isCollapsedMenuVisible: false
     }
   },
+  computed: {
+    isLoggedIn: function () {
+      return this.$store.getters.isLoggedIn
+    },
+    isAdminLoggedIn: function () {
+      return this.$store.getters.isAdminLoggedIn
+    }
+  },
   methods: {
     toggleMenu() {
       this.isCollapsedMenuVisible = !this.isCollapsedMenuVisible
+    },
+    logout: function () {
+      this.$store.dispatch('logout')
+        .then(() => this.$router.push('/login'))
+        .catch(err => console.log(err))
     }
   }
 }
@@ -53,28 +78,12 @@ export default {
   overflow: hidden;
   display: flex;
   flex-direction: row;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
 }
-
-/* #nav {
-  padding: 30px;
-  color: #fff;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #fff;
-  text-decoration: none;
-}
-
-#nav a:hover {
-  color: #3e3b49;
-  background-color: #f2f2f2;
-  border-radius: 5px;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-} */
 
 .navbar-collapsed {
   display: flex;
@@ -100,6 +109,7 @@ export default {
   color: #3e3b49;
   background-color: #f2f2f2;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .nav-button {
@@ -121,6 +131,7 @@ export default {
 
 .nav-button:hover .tribar {
   border-color: #3e3b49;
+  background-color: #3e3b49;
 }
 
 .tribar {
@@ -167,7 +178,6 @@ export default {
 
   .navbar-menu.responsive {
     display: block;
-    /* align-items: space-around; */
     position: absolute;
     top: 54px;
     right: 0;

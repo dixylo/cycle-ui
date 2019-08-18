@@ -1,7 +1,7 @@
 <template>
   <div id='card'>
-    <router-link :to="{ name: page, params: fieldId }">
-      <img alt='Vue logo' src='@/assets/logo.png'>
+    <router-link :to="{ name: field, params: { id: data._id } }">
+      <img :alt='data.name' :src='data.imgUrl' />
     </router-link>
     <div id='data'>
       <p>{{ data.name }}</p>
@@ -12,15 +12,7 @@
 <script>
 export default {
   name: 'Card',
-  props: ['data', 'fieldId'],
-  computed: {
-    page: function() {
-      if (!this.fieldId) return
-      if (this.fieldId.brandId && !this.fieldId.typeId) return 'brand'
-      if (!this.fieldId.brandId && this.fieldId.typeId) return 'type'
-      if (this.fieldId.brandId && this.fieldId.typeId) return 'cycle'
-    }
-  }
+  props: ['data', 'field']
 }
 </script>
 
@@ -40,7 +32,6 @@ export default {
 
 #card img {
   width: 100%;
-  height: 300px;
 }
 
 #data {

@@ -1,112 +1,96 @@
 <template>
-  <div id='home'>
+  <div class='container home'>
     <Carousel :slides='slides' />
     <div id='tab-container'>
       <button id='brands' class='tab' @click="switchContent">Brands</button>
       <button id='types' class='tab' @click="switchContent">Types</button>
     </div>
     <div class='card-container'>
-      <div v-for='item in items' :key='item.id'>
-        <Card :data='item' :fieldId='passId(item.id)' />
+      <div v-if='!items.length'>
+        <div v-if='loading'>
+          <img class='loading' alt='Loading...' src='@/assets/loading.png' />
+        </div>
+        <div v-if='error'>
+          Something failed. Please try again.
+          <button class='' @click='reload'>Reload Page</button>
+        </div>
+      </div>
+      <div v-else>
+        <div v-for='item in items' :key='item._id'>
+          <Card :data='item' :field='getField()' />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import Carousel from '@/components/Carousel'
 import Card from '@/components/Card.vue'
 
 export default {
   name: 'home',
-  components: {
-    Carousel,
-    Card
+  components: { Carousel, Card },
+  created () {
+    this.fetchAllBrands()
+    this.fetchAllTypes()
   },
-  data() {
+  data () {
     return {
       areBrandsShown: false,
-      brands: [
-        {
-          id: 1,
-          name: 'Giant',
-          category: 'Race'
-        },
-        {
-          id: 2,
-          name: 'Phoenix',
-          category: 'Utility'
-        },
-        {
-          id: 3,
-          name: 'Permanent',
-          category: 'Mountain'
-        },
-        {
-          id: 4,
-          name: 'Sphinx',
-          category: 'Kid'
-        }
-      ],
-      types: [
-        {
-          id: 1,
-          name: 'Race',
-          category: 'Giant'
-        },
-        {
-          id: 2,
-          name: 'Utility',
-          category: 'Phoenix'
-        },
-        {
-          id: 3,
-          name: 'Mountain',
-          category: 'Permanent'
-        },
-        {
-          id: 4,
-          name: 'Kid',
-          category: 'Sphinx'
-        }
-      ],
       slides: [
         {
           id: 1,
-          name: 'Inception',
-          url: 'Inception.jpg'
+          name: 'Slide_01',
+          url: 'slide1.jpg'
         },
         {
           id: 2,
-          name: 'PacificRim',
-          url: 'PacificRim.jpg'
+          name: 'Slide_02',
+          url: 'slide2.jpg'
         },
         {
           id: 3,
-          name: 'Interstellar',
-          url: 'Interstellar.jpg'
+          name: 'Slide_03',
+          url: 'slide3.jpg'
         }
       ]
     }
   },
   computed: {
-    items: function() {
-      return this.areBrandsShown ? this.brands : this.types
+    ...mapGetters(['getBrands', 'getTypes', 'brandStatus', 'typeStatus']),
+    items: function () {
+      const items = this.areBrandsShown ? this.getBrands : this.getTypes
+      return items
+    },
+    loading: function () {
+      const status = this.areBrandsShown ? this.brandStatus : this.typeStatus
+      return status === 'loading'
+    },
+    error: function () {
+      const status = this.areBrandsShown ? this.brandStatus : this.typeStatus
+      return status === 'error'
     }
   },
   methods: {
-    switchContent(e) {
+    ...mapActions(['fetchAllBrands', 'fetchAllTypes']),
+    switchContent (e) {
       this.areBrandsShown = e.currentTarget.id === 'brands'
     },
-    passId(id) {
-      return this.areBrandsShown ? { brandId: id } : { typeId: id }
+    getField () {
+      return this.areBrandsShown ? 'brand' : 'type'
+    },
+    reload () {
+      this.fetchAllBrands()
+      this.fetchAllTypes()
     }
   }
 }
 </script>
 
 <style scoped>
-#home {
+.home {
   margin: 0px auto;
   padding-top: 50px;
   height: 100%;

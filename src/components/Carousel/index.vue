@@ -1,6 +1,6 @@
 <template>
   <div id='carousel'>
-    <div v-for='(slide, index) in slides' :key='index'>
+    <div v-for='(slide, index) in slides' :key='slide.id'>
       <Slide :slide='slide' :display='switchSlide(index)' />
     </div>
     <Arrow

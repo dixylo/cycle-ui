@@ -1,66 +1,77 @@
 <template>
-  <div id='brand'>
-    <div class='overview'>
-      <div class='image-container'>
-        <img
-          alt='Brand Name'
-          src='@/assets/logo.png'
-          :style="{ width: '100%' }"
-        />
+  <div class='container'>
+    <div v-if='!brand'>
+      <div v-if='loading'>
+        <img class='loading' alt='Loading...' src='@/assets/loading.png' />
       </div>
-      <div class='metadata'>
-        <p><span>Name:</span> {Brand.name}</p>
-        <p><span>Director:</span> {Brand.directors}</p>
-        <p><span>Writers:</span> {Brand.writers}</p>
-        <p><span>Stars:</span> {Brand.stars}</p>
-        <p><span>Category:</span> {Brand.category}</p>
+      <div v-if='error'>
+        Something failed. Please try again.
+        <button class='' @click='reload'>Reload Page</button>
       </div>
     </div>
-    <div class='card-container'>
-      <h2>Types</h2>
-      <div v-for='type in types' :key='type.id'>
-        <Card :data='type' :fieldId='{ brandId, typeId: type.id }' />
+    <div v-else id='brand'>
+      <div class='overview'>
+        <div class='image-container'>
+          <img
+            :alt='brand.name'
+            :src='brand.imgUrl'
+            :style="{ width: '100%' }"
+          />
+        </div>
+        <div class='metadata'>
+          <p><span>Name:</span> {{ brand.name }}</p>
+          <p><span>Country:</span> {{ brand.country }}</p>
+          <p><span>Phone:</span> {{ brand.phone }}</p>
+          <p><span>Homepage:</span> {{ brand.homepage }}</p>
+          <p><span>Introduction:</span> {{ brand.description }}</p>
+        </div>
+      </div>
+      <div class='card-container'>
+        <div v-if='brand.models.length'>
+          <h2>Models</h2>
+          <div v-for='model in brand.models' :key='model._id'>
+            <Card :data='model' field='model' />
+          </div>
+        </div>
+        <div v-else>
+          <h2>Oops! We haven't got any models of this brand yet.</h2>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import Card from '@/components/Card.vue'
 
 export default {
   name: 'brand',
-  components: {
-    Card
+  components: { Card },
+  computed: {
+    ...mapGetters(['getBrands', 'getTheBrand', 'brandStatus']),
+    brand: function () {
+      const id = this.$route.params.id
+      if (this.getBrands.length) {
+        const brand = this.getBrands.find(b => b._id.toString() === id)
+        return brand
+      }
+      if (!this.getTheBrand || this.getTheBrand._id.toString() !== id) {
+        this.fetchBrandById(id)
+      }
+      return this.getTheBrand
+    },
+    loading: function () {
+      return this.brandStatus === 'loading'
+    },
+    error: function () {
+      return this.brandStatus === 'error'
+    }
   },
-  created() {
-    this.brandId = parseInt(this.$route.params.brandId)
-  },
-  data() {
-    return {
-      brandId: 0,
-      types: [
-        {
-          id: 1,
-          name: 'Race',
-          category: 'Giant'
-        },
-        {
-          id: 2,
-          name: 'Utility',
-          category: 'Phoenix'
-        },
-        {
-          id: 3,
-          name: 'Mountain',
-          category: 'Permanent'
-        },
-        {
-          id: 4,
-          name: 'Kid',
-          category: 'Sphinx'
-        }
-      ]
+  methods: {
+    ...mapActions(['fetchBrandById']),
+    reload () {
+      this.fetchBrandById(this.$route.params.id)
     }
   }
 }

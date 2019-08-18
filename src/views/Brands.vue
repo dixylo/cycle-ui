@@ -1,44 +1,49 @@
 <template>
   <div class='card-container'>
     <h2>All Brands</h2>
-    <div v-for='brand in brands' :key='brand.id'>
-      <Card :data='brand' :fieldId='{ brandId: brand.id }' />
+    <div v-if='!brands.length'>
+      <div v-if='loading'>
+        <img class='loading' alt='Loading...' src='@/assets/loading.png' />
+      </div>
+      <div v-if='error'>
+        Something failed. Please try again.
+        <button class='' @click='reload'>Reload Page</button>
+      </div>
+    </div>
+    <div v-else>
+      <div v-for='brand in brands' :key='brand._id'>
+        <Card :data='brand' field='brand' />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import Card from '@/components/Card.vue'
 
 export default {
   name: 'brands',
-  components: {
-    Card
+  components: { Card },
+  created () {
+    if (!this.brands.length) this.fetchAllBrands()
   },
-  data() {
-    return {
-      brands: [
-        {
-          id: 1,
-          name: 'Giant',
-          category: 'Race'
-        },
-        {
-          id: 2,
-          name: 'Phoenix',
-          category: 'Utility'
-        },
-        {
-          id: 3,
-          name: 'Permanent',
-          category: 'Mountain'
-        },
-        {
-          id: 4,
-          name: 'Sphinx',
-          category: 'Kid'
-        }
-      ]
+  computed: {
+    ...mapGetters(['getBrands', 'brandStatus']),
+    brands: function () {
+      return this.getBrands
+    },
+    loading: function () {
+      return this.brandStatus === 'loading'
+    },
+    error: function () {
+      return this.brandStatus === 'error'
+    }
+  },
+  methods: {
+    ...mapActions(['fetchAllBrands']),
+    reload () {
+      this.fetchAllBrands()
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div id='footer'>
-    <p>&copy;&nbsp;2019 Copyright by DIXYLO&trade;. All Rights Reserved.</p>
+    <p>&copy;&nbsp;2019 Copyright by CYCLY&trade;. All Rights Reserved.</p>
   </div>
 </template>
 

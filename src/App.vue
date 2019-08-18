@@ -15,6 +15,16 @@ export default {
   components: {
     Header,
     Footer
+  },
+  created: function () {
+    this.$http.interceptors.response.use(undefined, function (err) {
+      return new Promise(function (resolve, reject) {
+        if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+          this.$store.dispatch('logout')
+        }
+        throw err;
+      })
+    })
   }
 }
 </script>
@@ -29,6 +39,10 @@ body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  min-height: 100vh;
 }
 
 .card-container {
@@ -61,6 +75,16 @@ body {
 .metadata span {
   font-size: 15px;
   color: #333333;
+}
+
+.loading {
+  width: 30px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 @media screen and (max-width: 1024px) {
