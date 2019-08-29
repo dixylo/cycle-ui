@@ -58,4 +58,10 @@ module.exports = [{
   country: "Taiwan",
   phone: "+886 4 8529 6171",
   homepage: "www.merida-bikes.com"
+}, {
+  name: "Nimbus Unicycles",
+  description: "Nimbus was started in 2001 and is the premier house brand of Unicycle.com. The brand was started to help differentiate between our standard unicycles and the newer higher end unicycles we were designing in response to the requests from the rapidly developing sport at the time. Nimbus products are why we adopted the mantra “designed for unicyclists, by unicyclists”. Nimbus unicycles are designed with the riders in mind and they are very functional and durable. This reputation has been gained over many years. When you look within the forums and social media where riders talk of broken parts and failures on their unicycles, it is rare to see any Nimbus products, even though Nimbus outsells almost all other specialist brands of unicycles in the world.",
+  country: "UK",
+  phone: "+44 800 980 0711",
+  homepage: "www.nimbusunicycles.com"
 }];

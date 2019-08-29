@@ -35,8 +35,8 @@
           <span class='nav-item' @click.prevent='logout'>Log out</span>
         </div>
         <div v-else>
-          <router-link class='nav-item' to='/signup'>Sign up</router-link>
           <router-link class='nav-item' to='/login'>Log in</router-link>
+          <router-link class='nav-item' to='/signup'>Sign up</router-link>
         </div>
       </div>
     </div>
@@ -74,7 +74,7 @@ export default {
 
 <style scoped>
 #header {
-  background-color: #3e3b49;
+  background-color: #00284c;
   overflow: hidden;
   display: flex;
   flex-direction: row;

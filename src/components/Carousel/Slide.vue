@@ -1,6 +1,5 @@
 <template>
   <div class='slides fade' :style='{ display }'>
-    <!-- <img :alt='slide.name' :src='slide.url' /> -->
     <img :alt='slide.name' :src='getUrl(slide.url)' />
   </div>
 </template>

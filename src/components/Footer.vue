@@ -12,9 +12,11 @@ export default {
 
 <style scoped>
 #footer {
-  background-color: #3e3b49;
+  background-color: #00284c;
   overflow: hidden;
   text-align: center;
   color: white;
+  position: relative;
+  z-index: 1;
 }
 </style>

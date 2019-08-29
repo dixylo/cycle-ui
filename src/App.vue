@@ -31,50 +31,32 @@ export default {
 
 
 <style>
-body {
+html, body {
   margin: 0;
   padding: 0;
+}
+
+body {
   text-align: center;
   color: #2c3e50;
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font: 20px 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
   min-height: 100vh;
+  margin-top: 3.7rem;
 }
 
 .card-container {
+  position: relative;
   margin: 0 auto;
   width: 1024px;
   overflow: auto;
-}
-
-.overview {
-  width: 1100px;
-  height: 600px;
-  margin: 0px auto;
-  overflow: hidden;
   display: flex;
-  justify-content: center;
-  align-items: center;  
-}
-
-.image-container {
-  width: 300px;
-  height: 444px;
-  margin: 10px 20px;
-}
-
-.metadata {
-  width: 400px;
-  font: 25px Courier New;
-}
-
-.metadata span {
-  font-size: 15px;
-  color: #333333;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .loading {
