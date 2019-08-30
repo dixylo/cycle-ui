@@ -14,13 +14,13 @@
           {{ computeCell(row, heading.value) }}
         </td>
         <td>
-          <span
-            v-for='(action,index) in actions'
+          <p
+            v-for='(action, index) in actions'
             :key='index'
             @click.prevent='action.callback(row._id)'
           >
             {{ action.text }}
-          </span>
+          </p>
         </td>
       </tr>
     </tbody>
@@ -37,6 +37,10 @@ export default {
         const keys = key.split('.')
         return row[keys[0]][keys[1]]
       }
+      if (key.includes('time')) {
+        if (!row[key]) return
+        return row[key].slice(0, 16).replace('T', ', ')
+      }
       return row[key]
     }
   }
@@ -47,8 +51,7 @@ export default {
 table {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 80%;
-  margin: auto;
+  max-width: 1024px;
   background-color: white;
 }
 
@@ -60,6 +63,10 @@ tr:hover {
   background-color: #ddd;
 }
 
+tr:hover td {
+  border-color: #fff;
+}
+
 th, td {
   border: 1px solid #ddd;
   padding: 8px;
@@ -68,14 +75,20 @@ th, td {
 th {
   padding-top: 12px;
   padding-bottom: 12px;
-  text-align: left;
+  text-align: center;
   background-color: #4CAF50;
   color: white;
 }
 
-span {
+p {
   color: #00a3cf;
   font-size: 12px;
   cursor: pointer;
+  transition: .3s
+}
+
+p:hover {
+  color: #00cbff;
+  transform: scale(1.02)
 }
 </style>

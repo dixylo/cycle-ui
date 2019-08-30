@@ -164,7 +164,7 @@ export default {
   background-size: cover;
   position: relative;
   z-index: 1;
-  filter: blur(4px) brightness(70%);
+  filter: blur(3px) brightness(70%);
   transform: scale(1.01);
 }
 
@@ -196,6 +196,7 @@ export default {
   padding: .5em 0;
   color: #fff;
   font-size: 50px;
+  text-shadow: 2px 2px 4px #000000;
 }
 
 #mp1 {

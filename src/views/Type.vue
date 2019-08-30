@@ -20,7 +20,7 @@
             />
           </div>
           <div class='metadata'>
-            <p><span>Name:</span> {{ type.name }}</p>
+            <p><span>Type Name:</span> {{ type.name }}</p>
             <p><span>Introduction:</span> {{ type.description }}</p>
           </div>
         </div>
@@ -81,6 +81,7 @@ export default {
   color: #FFF;
   padding: 50px;
   position: relative;
+  text-shadow: 2px 2px 4px #000000;
 }
 
 .hero {
@@ -105,8 +106,8 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-	background-color: #006600;
-  opacity: .7;
+	background-color: #000;
+  opacity: .6;
 }
 
 .overview {
@@ -161,7 +162,6 @@ export default {
   font-style: italic;
   font-weight: bold;
   margin: 0;
-  padding-bottom: 2em;
   position: relative;
 }
 
@@ -172,6 +172,7 @@ export default {
   font-size: 100px;
   font-style: normal;
   position: absolute;
+  z-index: 1;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
@@ -198,5 +199,6 @@ export default {
 
 .card-container {
   background-color: azure;
+  padding: 100px;
 }
 </style>

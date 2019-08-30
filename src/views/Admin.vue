@@ -23,12 +23,12 @@
         </button>
       </div>
       <div class='tabcontent'>
-        <Table         
+        <Table class='table'
           :header='tabs[selectedTabIndex].header'
           :data='list(selectedTabIndex)'
           :actions='tabs[selectedTabIndex].actions'
         />
-        <button @click='reload(tabs[selectedTabIndex].value)'>
+        <button class='refresh' @click='reload(tabs[selectedTabIndex].value)'>
           <div v-if='loading'>
             <img class='loading' alt='Loading...' src='@/assets/loading.png'/>
           </div>
@@ -205,35 +205,91 @@ export default {
 </script>
 
 <style scoped>
+.admin {
+  position: relative;
+}
+
+.admin::before {
+  content: '';
+	width: 0;
+	height: 0;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+	border-top: 50px solid #376FB2;
+  border-bottom: 50px solid transparent;
+	border-left: 70vw solid #376FB2;
+	border-right: 30vw solid #00A9E0;
+}
+
 .tab {
-  overflow: hidden;
-  background-color: #f1f1f1;
   display: flex;
   justify-content: center;
+  margin: 0 auto;
+  padding-top: 100px;
+  max-width: 1024px;
 }
 
 .tablink {
-  background-color: inherit;
-  float: left;
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 14px 16px;
   transition: 0.3s;
-  border-radius: 5px;
-  font-size: 20px;
+  position: relative;
+  color: #003C71;
+  font-size: 50px;
+  font-weight: bold;
+  margin: 0 .5em;
 }
 
 .tablink:hover {
-  background-color: #ddd;
+  color: skyblue;
 }
 
 .tablink-active {
-  text-decoration: underline;
+  position: relative;
+}
+
+.tablink-active::after {
+  content: '___';
+  color: #00A9E0;
+  display: block;
+  font-size: 80px;
+  font-style: normal;
+  position: absolute;
+  left: 50%;
+  bottom: -35%;
+  transform: translateX(-50%);
 }
 
 .tabcontent {
-  padding: 6px 12px;
-  border-top: none;
+  padding: 80px 0;
+  background-color: azure;
+}
+
+.table {
+  margin: 0 auto;
+}
+
+.refresh {
+  margin: 20px auto;
+  padding: 1em 3em;
+  border-radius: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #FFF;
+  background-color: #006ccc;
+  border-color: #006ccc;
+}
+
+.refresh:hover {
+  background-color: #003C71;
+  border-color: #003C71;
+}
+
+.refresh:focus {
+  outline: none;
 }
 </style>

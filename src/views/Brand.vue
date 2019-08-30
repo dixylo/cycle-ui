@@ -20,7 +20,7 @@
             />
           </div>
           <div class='metadata'>
-            <p><span>Name:</span> {{ brand.name }}</p>
+            <p><span>Brand Name:</span> {{ brand.name }}</p>
             <p><span>Country:</span> {{ brand.country }}</p>
             <p><span>Phone:</span> {{ brand.phone }}</p>
             <p><span>Homepage:</span> {{ brand.homepage }}</p>
@@ -86,6 +86,7 @@ export default {
   color: #FFF;
   padding: 50px;
   position: relative;
+  text-shadow: 2px 2px 4px #000000;
 }
 
 .hero {
@@ -110,8 +111,8 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-	background-color: #003C71;
-  opacity: .8;
+	background-color: #000;
+  opacity: .6;
 }
 
 .overview {
@@ -178,7 +179,6 @@ export default {
   font-style: italic;
   font-weight: bold;
   margin: 0;
-  padding-bottom: 2em;
   position: relative;
 }
 
@@ -192,6 +192,7 @@ export default {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 1;
 }
 
 .model-box {
@@ -215,5 +216,6 @@ export default {
 
 .card-container {
   background-color: azure;
+  padding: 100px;
 }
 </style>

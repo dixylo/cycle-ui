@@ -239,6 +239,11 @@ hr {
   justify-content: flex-end;
 }
 
+label {
+  display: flex;
+  align-items: center;
+}
+
 .form-section input {
   color: #003C71;
   border-bottom: 2px solid #003C71;

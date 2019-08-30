@@ -244,7 +244,11 @@ hr {
   text-align: left;
   display: flex;
   justify-content: flex-start;
-  margin: .25em;
+}
+
+label {
+  display: flex;
+  align-items: center;
 }
 
 .form-section input {

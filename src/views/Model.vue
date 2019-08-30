@@ -21,9 +21,9 @@
             />
           </div>
           <div class='metadata'>
-            <p><span>Name:</span> {{ model.name }}</p>
-            <p><span>Brand:</span> {{ model.brand.name }}</p>
-            <p><span>Type:</span> {{ model.type.name }}</p>
+            <p><span>Model Name:</span> {{ model.name }}</p>
+            <p><span>Brand Name:</span> {{ model.brand.name }}</p>
+            <p><span>Type Name:</span> {{ model.type.name }}</p>
           </div>
         </div>
         <div class='introduction'>
@@ -190,7 +190,7 @@ export default {
   right: 0;
   bottom: 0;
 	background-color: #000;
-  opacity: .7;
+  opacity: .6;
 }
 
 .overview {

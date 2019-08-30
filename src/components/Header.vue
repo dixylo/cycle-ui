@@ -2,7 +2,7 @@
   <div id="header">
     <div class='navbar-collapsed'>
       <router-link class='nav-logo' to='/'>
-        <img alt='icon' src='@/assets/logo.png' />
+        <!-- <img alt='icon' src='@/assets/logo.png' /> -->
         <span><b>CYCLY</b></span>
       </router-link>
       <button class='nav-button' @click='toggleMenu'>
@@ -83,6 +83,7 @@ export default {
   left: 0;
   right: 0;
   z-index: 100;
+  height: 60px;
 }
 
 .navbar-collapsed {
