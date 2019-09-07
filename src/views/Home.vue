@@ -8,13 +8,7 @@
       <p class='box-title'>Find Your Favourite Brand</p>
       <div class='item-list'>
         <div v-if='!brands.length'>
-          <div v-if='loadingBrands'>
-            <img class='loading' alt='Loading...' src='@/assets/loading.png' />
-          </div>
-          <div v-if='error'>
-            Something failed. Please try again.
-            <button class='' @click='reload'>Reload Page</button>
-          </div>
+          <Skeleton :status='brandStatus' :onReload='fetchAllBrands' />
         </div>
         <div class='items' v-else>
           <div v-for='brand in brands' :key='brand._id'>
@@ -41,13 +35,7 @@
       <p class='box-title'>Choose a Type You Need</p>
       <div class='item-list'>
         <div v-if='!types.length'>
-          <div v-if='loadingTypes'>
-            <img class='loading' alt='Loading...' src='@/assets/loading.png' />
-          </div>
-          <div v-if='error'>
-            Something failed. Please try again.
-            <button class='' @click='reload'>Reload Page</button>
-          </div>
+          <Skeleton :status='typeStatus' :onReload='fetchAllTypes' />
         </div>
         <div class='items' v-else>
           <div v-for='type in types' :key='type._id'>
@@ -74,11 +62,12 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import Carousel from '@/components/Carousel'
-import Card from '@/components/Card.vue'
+import Card from '@/components/Card'
+import Skeleton from '@/components/Skeleton'
 
 export default {
   name: 'home',
-  components: { Carousel, Card },
+  components: { Carousel, Card, Skeleton },
   created () {
     this.fetchAllBrands()
     this.fetchAllTypes()
@@ -111,27 +100,9 @@ export default {
     },
     types: function () {
       return this.getTypes
-    },
-    loadingBrands: function () {
-      return this.brandStatus === 'loading'
-    },
-    loadingTypes: function () {
-      return this.typeStatus === 'loading'
-    },
-    error: function () {
-      return this.brandStatus === 'error'
-    },
-    error: function () {
-      return this.typeStatus === 'error'
     }
   },
-  methods: {
-    ...mapActions(['fetchAllBrands', 'fetchAllTypes']),
-    reload () {
-      this.fetchAllBrands()
-      this.fetchAllTypes()
-    }
-  }
+  methods: mapActions(['fetchAllBrands', 'fetchAllTypes'])
 }
 </script>
 
@@ -234,12 +205,12 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #dbdbdb;
+  color: #fff;
   font-size: 25px;
   font-weight: bold;
   padding: 1em 3em;
   background: transparent;
-  border: 4px solid rgba(219, 219, 219, 1);
+  border: 4px solid #fff;
   border-radius: 2em;
   margin: 0 3em;
   text-decoration: none;
@@ -248,7 +219,7 @@ export default {
 
 .link:hover {
   color: gray;
-  background: rgba(219, 219, 219, 1);
+  background: #fff;
 }
 
 .item-box {

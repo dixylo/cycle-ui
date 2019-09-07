@@ -182,8 +182,8 @@ export default {
     position: absolute;
     top: 54px;
     right: 0;
-    z-index: 1;
-    background-color: #3e3b49;
+    z-index: 100;
+    background-color: #00284c;
   }
 
   .nav-button {

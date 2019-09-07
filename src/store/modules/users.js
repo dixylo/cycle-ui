@@ -54,6 +54,25 @@ const actions = {
         console.log(err)
       })
   },
+  fetchMe ({ commit }) {
+    const token = localStorage.getItem('token')
+    if (!token) return alert('Please log in to proceed.')
+
+    commit('user_request')
+    
+    axios({
+      method: 'get',
+      url: `/users/self/get`,
+      headers: { Authorization: token }
+    })    
+      .then(response => {
+        commit('user_success', response.data)
+      })
+      .catch(err => {
+        commit('user_error')
+        console.log(err)
+      })
+  },
   deleteUser ({ commit }, id) {
     const token = localStorage.getItem('token')
     if (!token) return alert('Please log in to proceed.')

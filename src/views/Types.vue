@@ -11,13 +11,7 @@
         Where there are roads, there'll be adventurous cycling souls. Let us equip you to conquer the unconquered terrain.
       </p>
       <div v-if='!types.length'>
-        <div v-if='loading'>
-          <img class='loading' alt='Loading...' src='@/assets/loading.png' />
-        </div>
-        <div v-if='error'>
-          Something failed. Please try again.
-          <button class='' @click='reload'>Reload Page</button>
-        </div>
+        <Skeleton :status='typeStatus' :onReload='fetchAllTypes' />
       </div>
       <div class='items' v-else>
         <div v-for='type in types' :key='type._id'>
@@ -30,11 +24,12 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import Card from '@/components/Card.vue'
+import Card from '@/components/Card'
+import Skeleton from '@/components/Skeleton'
 
 export default {
   name: 'types',
-  components: { Card },
+  components: { Card, Skeleton },
   created () {
     if (!this.types.length) this.fetchAllTypes()
   },
@@ -42,20 +37,9 @@ export default {
     ...mapGetters(['getTypes', 'typeStatus']),
     types: function () {
       return this.getTypes
-    },
-    loading: function () {
-      return this.typeStatus === 'loading'
-    },
-    error: function () {
-      return this.typeStatus === 'error'
     }
   },
-  methods: {
-    ...mapActions(['fetchAllTypes']),
-    reload () {
-      this.fetchAllTypes()
-    }
-  }
+  methods: mapActions(['fetchAllTypes'])
 }
 </script>
 

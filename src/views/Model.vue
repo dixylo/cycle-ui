@@ -1,13 +1,10 @@
 <template>
   <div class='container'>
     <div v-if='!model'>
-      <div v-if='loadingModel'>
-        <img class='loading' alt='Loading...' src='@/assets/loading.png' />
-      </div>
-      <div v-if='error'>
-        Something failed. Please try again.
-        <button class='' @click='reload'>Reload Page</button>
-      </div>
+      <Skeleton
+        :status='modelStatus'
+        :onReload='() => this.fetchModelById(this.$route.params.id)'
+      />
     </div>
     <div v-else>
       <div class='data'>
@@ -17,7 +14,6 @@
             <img
               :alt='model.name'
               :src='model.imgUrl'
-              :style="{ width: '100%' }"
             />
           </div>
           <div class='metadata'>
@@ -32,7 +28,7 @@
       </div>
       <div class='cycle-box'>
         <p class='box-title'>Cycles</p>
-        <div v-if='!model.cycles.length'>
+        <div class='no-cards' v-if='!model.cycles.length'>
           <h2>Oops! We haven't got any cycles of this model yet.</h2>
         </div>
         <div class='items' v-else>
@@ -81,16 +77,16 @@
               v-model='timeToCollect'
               required
             >
-            <button
+            <Button
               class='submit'
               type='submit'
-              :disabled='loadingRental'
+              :status='rentalStatus'
             >
               <div v-if='loadingRental'>
                 <img class='loading' alt='Loading...' src='@/assets/loading.png'/>
               </div>
               <div v-else>Place an Order</div>
-            </button>
+            </Button>
           </form>
         </div>
       </div>
@@ -100,9 +96,12 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import Skeleton from '@/components/Skeleton'
+import Button from '@/components/Button'
 
 export default {
   name: 'model',
+  components: { Skeleton, Button },
   data () {
     return {
       selectedCycleId: '',
@@ -121,19 +120,10 @@ export default {
         this.fetchModelById(id)
       }
       return this.getTheModel
-    },
-    loadingModel: function () {
-      return this.modelStatus === 'loading'
-    },
-    loadingRental: function () {
-      return this.rentalStatus === 'loading'
-    },
-    error: function () {
-      return this.modelStatus === 'error'
     }
   },
   methods: {
-    ...mapActions(['fetchAllModels', 'fetchModelById', 'createRental']),
+    ...mapActions(['fetchModelById', 'createRental']),
     handleSubmit () {
       const isLoggedIn = this.isLoggedIn
       if (!isLoggedIn) {
@@ -152,9 +142,6 @@ export default {
         console.log(err)
         alert('Order failed. Please try again.')
       })
-    },
-    reload () {
-      this.fetchModelById(this.$route.params.id)
     }
   }
 }
@@ -165,6 +152,7 @@ export default {
   color: #FFF;
   padding: 50px;
   position: relative;
+  text-shadow: 2px 2px 4px #000000;
 }
 
 .hero {
@@ -387,5 +375,9 @@ button {
 button:hover {
   color: #FFF;
   background-color: #003C71;
+}
+
+.no-cards {
+  padding: 3em;
 }
 </style>

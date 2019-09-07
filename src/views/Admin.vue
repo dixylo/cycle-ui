@@ -1,39 +1,31 @@
 <template>
   <div class='container admin'>
-    <div v-if='!list.length'>
-      <div v-if='loading'>
-        <img class='loading' alt='Loading...' src='@/assets/loading.png' />
-      </div>
-      <div v-else-if='error'>
-        Something failed. Please try again.
-        <button class='' @click='reload'>Reload Page</button>
-      </div>
-      <div v-else>
-        <h3>No Data.</h3>
-      </div>
+    <div class='tab'>
+      <button v-for='(tab, index) in tabs' :key='index'
+        class='tablink'
+        :class="{'tablink-active': index === selectedTabIndex}"
+        @click='switchTab(index)'
+      >
+        {{ tab.text }}
+      </button>
     </div>
-    <div v-else>
-      <div class='tab'>
-        <button v-for='(tab, index) in tabs' :key='index'
-          class='tablink'
-          :class="{'tablink-active': index === selectedTabIndex}"
-          @click='switchTab(index)'
-        >
-          {{ tab.text }}
-        </button>
-      </div>
-      <div class='tabcontent'>
+    <div class='tabcontent'>
+      <div v-if='list.length'>
         <Table class='table'
           :header='tabs[selectedTabIndex].header'
-          :data='list(selectedTabIndex)'
+          :data='list'
           :actions='tabs[selectedTabIndex].actions'
         />
-        <button class='refresh' @click='reload(tabs[selectedTabIndex].value)'>
-          <div v-if='loading'>
-            <img class='loading' alt='Loading...' src='@/assets/loading.png'/>
-          </div>
-          <div v-else>Refresh</div>
-        </button>
+        <Button
+          class='refresh'
+          :status='status'
+          :onClick='reload'
+        >
+          Refresh
+        </Button>
+      </div>
+      <div v-else>
+        <Skeleton :status='status' :onReload='reload' />
       </div>
     </div>
   </div>
@@ -42,10 +34,12 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import Table from '@/components/Table'
+import Skeleton from '@/components/Skeleton'
+import Button from '@/components/Button'
 
 export default {
   name: 'admin',
-  components: { Table },
+  components: { Table, Skeleton, Button },
   created () {
     this.fetchAllRentals()
     this.fetchAllUsers()
@@ -119,18 +113,40 @@ export default {
   },
   computed: {
     ...mapGetters(['getRentals', 'getUsers', 'rentalStatus', 'userStatus']),
-    loading: function () {
-      const status = this.rentalStatus === 'loading' || this.userStatus === 'loading'
-      return status
+    list: function () {
+      const field = this.tabs[this.selectedTabIndex].value
+      switch (field) {
+        case 'rentals':
+          return this.getRentals
+        case 'users':
+          return this.getUsers
+        default:
+          return
+      }
     },
-    error: function () {
-      const status = this.rentalStatus === 'error' || this.userStatus === 'error'
-      return status
-    }
+    status: function () {
+      const field = this.tabs[this.selectedTabIndex].value
+      switch (field) {
+        case 'rentals':
+          return this.rentalStatus
+        case 'users':
+          return this.userStatus
+        default:
+          return
+      }
+    },
   },
   methods: {
-    ...mapActions(['fetchAllRentals', 'fetchAllUsers', 'startRentout', 'finishRental', 'deleteRental', 'deleteUser']),
-    reload (field) {
+    ...mapActions([
+      'fetchAllRentals',
+      'fetchAllUsers',
+      'startRentout',
+      'finishRental',
+      'deleteRental',
+      'deleteUser'
+    ]),
+    reload () {
+      const field = this.tabs[this.selectedTabIndex].value
       switch (field) {
         case 'rentals':
           this.fetchAllRentals()
@@ -144,17 +160,6 @@ export default {
     },
     switchTab (index) {
       this.selectedTabIndex = index
-    },
-    list (index) {
-      const field = this.tabs[index].value
-      switch (field) {
-        case 'rentals':
-          return this.getRentals
-        case 'users':
-          return this.getUsers
-        default:
-          return
-      }
     },
     beginRentout: function (id) {
       const isConfirmed = window.confirm('Are you sure to start this rentout?')

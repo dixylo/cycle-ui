@@ -1,80 +1,67 @@
 <template>  
   <div class='container user'>
-    <div class='user-panel user-panel-login'>
+    <div class='user-panel'>
       <div class='form-section'>
         <p id='form-title'>Create an account</p>
-        <div v-if='error'>Signup failed. Please try it again.</div>
+        <div v-if="status === 'error'">Signup failed. Please try it again.</div>
         <form
           class='user-panel-div'
           @submit.prevent='signup'
         >
-          <div class='user-panel-row'>
-            <label htmlFor='username'>USERNAME</label>
-            <input
-              type='username'
-              name='username'
-              class='user-panel-input'
-              pattern='[A-Za-z0-9-._]{4,20}'
-              v-model='username'
-              required
-              autofocus
-            />
-          </div>
-          <div class='user-panel-row'>
-            <label htmlFor='password'>PASSWORD</label>
-            <input
-              type='password'
-              name='password'
-              class='user-panel-input'
-              pattern="[A-Za-z0-9@$!%*?&]{6,255}"
-              v-model='password'
-              required
-            />
-          </div>
-          <div class='user-panel-row'>
-            <label htmlFor='confirm-password'>CONFIRM PASSWORD</label>
-            <input
-              type='password'
-              name='confirm-password'
-              class='user-panel-input'
-              pattern="[A-Za-z0-9@$!%*?&]{6,255}"
-              v-model='password_confirmed'
-              required
-            />
-          </div>
-          <div class='user-panel-row'>
-            <label htmlFor='email'>EMAIL</label>
-            <input
-              type='email'
-              name='email'
-              class='user-panel-input'
-              minlength='6'
-              maxlength='255'
-              v-model='email'
-              required
-            />
-          </div>
-          <div class='user-panel-row'>
-            <label htmlFor='phone'>PHONE</label>
-            <input
-              type='tel'
-              name='phone'
-              class='user-panel-input'
-              pattern='[+]?[0-9\s]{6,20}'
-              v-model='phone'
-              required
-            />
-          </div>
-          <button
+          <input
+            type='username'
+            name='username'
+            class='user-panel-input'
+            pattern='[A-Za-z0-9-._]{4,20}'
+            placeholder='Username'
+            v-model='username'
+            required
+            autofocus
+          />
+          <input
+            type='password'
+            name='password'
+            class='user-panel-input'
+            pattern="[A-Za-z0-9@$!%*?&]{6,255}"
+            placeholder='Password'
+            v-model='password'
+            required
+          />
+          <input
+            type='password'
+            name='confirm-password'
+            class='user-panel-input'
+            pattern="[A-Za-z0-9@$!%*?&]{6,255}"
+            placeholder='Repeat password to confirm '
+            v-model='password_confirmed'
+            required
+          />
+          <input
+            type='email'
+            name='email'
+            class='user-panel-input'
+            minlength='6'
+            maxlength='255'
+            placeholder='Email address'
+            v-model='email'
+            required
+          />
+          <input
+            type='tel'
+            name='phone'
+            class='user-panel-input'
+            pattern='[+]?[0-9\s]{6,20}'
+            placeholder='Phone number'
+            v-model='phone'
+            required
+          />
+          <Button
             class='user-panel-button'
             type='submit'
-            :disabled='loading'
+            :status='status'
           >
-            <div v-if='loading'>
-              <img class='loading' alt='Loading...' src='@/assets/loading.png'/>
-            </div>
-            <div v-else>Sign up</div>
-          </button>
+            Sign up
+          </Button>
         </form>
       </div>
       <div class='welcome-section'>
@@ -89,8 +76,11 @@
 </template>
 
 <script>
+import Button from '@/components/Button'
+
 export default {
   name: 'signup',
+  components: { Button },
   data () {
     return {
       username: '',
@@ -101,11 +91,8 @@ export default {
     }
   },
   computed: {
-    loading: function () {
-      return this.$store.getters.authStatus === 'loading'
-    },
-    error: function () {
-      return this.$store.getters.authStatus === 'error'
+    status: function () {
+      return this.$store.getters.authStatus
     }
   },
   methods: {
@@ -147,10 +134,6 @@ export default {
   display: flex;
   justify-content: center;
   opacity: .9;
-}
-
-.user-panel-login {
-  color: black;
 }
 
 .welcome-section {
@@ -233,36 +216,19 @@ hr {
 
 .user-panel-div {
   margin: 0 auto;
-  text-align: center;
   width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.user-panel-row {
-  text-align: left;
-  display: flex;
-  justify-content: flex-start;
-}
-
-label {
-  display: flex;
-  align-items: center;
-}
-
-.form-section input {
+.user-panel-input {
+  height: 1em;
+  font-size: 20px;
+  margin: .5em;
+  border: none;
   color: #003c71;
   border-bottom: 2px solid #003c71;
-}
-
-.user-panel-input {
-  display: inline-block;
-  width: 100%;
-  height: 20px;
-  font-size: 20px;
-  margin: 10px;
-  border: none;
   background-color: transparent;
   outline: none;
 }
@@ -273,7 +239,6 @@ label {
   margin: 20px auto;
   border-radius: 5px;
   font-size: 20px;
-  cursor: pointer;
   color: #FFF;
   background-color: #003c71;
   border-color: #003c71;
@@ -282,9 +247,5 @@ label {
 .user-panel-button:hover {
   background-color: #376FB2;
   border-color: #376FB2;
-}
-
-.user-panel-button:focus {
-  outline: none;
 }
 </style>

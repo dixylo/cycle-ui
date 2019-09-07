@@ -1,6 +1,6 @@
 <template>  
   <div class='container user'>
-    <div class='user-panel user-panel-login'>
+    <div class='user-panel'>
       <div class='welcome-section'>
         <p id='wp1'>Welcome back!</p>
         <p id='wp2'>Cycly is ready to give you the best cycle-renting service. Go enjoy cycling.</p>
@@ -10,75 +10,50 @@
       </div>
       <div class='form-section'>
         <p id='form-title'>Log into Cycly</p>
-        <div v-if='error'>Invalid Email or Password.</div>
-        <div v-if='isLoggedIn'>
-          <div class='user-panel-div'>
-            <br />
-            <p>You are now logged in as <i>{{ username }}</i>.</p>
-            <br />
-            <button
-              class='user-panel-button'
-              @click='logout'
-              :disabled='loading'
-            >
-              <div v-if='loading'>
-                <img class='loading' alt='Loading...' src='@/assets/loading.png' />
-              </div>
-              <div v-else>Log out</div>
-            </button> 
-          </div>
-        </div>
-        <div v-else>
-          <form
-            class='user-panel-div'
-            @submit.prevent='login'
+        <p v-if="status === 'error'">Invalid Email or Password.</p>
+        <form
+          class='user-panel-div'
+          @submit.prevent='login'
+        >
+          <input
+            type='email'
+            name='email'
+            class='user-panel-input'
+            minlength='6'
+            maxlength='255'
+            placeholder='Email address'
+            v-model='email'
+            required
+            autofocus
+          />
+          <input
+            type='password'
+            name='password'
+            class='user-panel-input'
+            pattern="[A-Za-z0-9@$!%*?&]{6,255}"
+            placeholder='Password'
+            v-model='password'
+            required
+          />
+          <Button
+            class='user-panel-button'
+            type='submit'
+            :status='status'
           >
-            <div class='user-panel-row'>
-              <label htmlFor='email'>EMAIL</label>
-              <input
-                type='email'
-                name='email'
-                class='user-panel-input'
-                minlength='6'
-                maxlength='255'
-                v-model='email'
-                required
-                autofocus
-              />
-            </div>
-            <div class='user-panel-row'>
-              <label htmlFor='password'>PASSWORD</label>
-              <input
-                type='password'
-                name='password'
-                class='user-panel-input'
-                pattern="[A-Za-z0-9@$!%*?&]{6,255}"
-                v-model='password'
-                required
-              />
-            </div>
-            <button
-              class='user-panel-button'
-              type='submit'
-              :disabled='loading'
-            >
-              <div v-if='loading'>
-                <img class='loading' alt='Loading...' src='@/assets/loading.png'/>
-              </div>
-              <div v-else>Log in</div>
-            </button>
-          </form>
-        </div>
+            Log in
+          </Button>
+        </form>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import Button from '@/components/Button'
 
 export default {
   name: 'login',
+  components: { Button },
   data () {
     return {
       email: '',
@@ -86,17 +61,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getCurrentUser', 'isLoggedIn', 'authStatus']),
-    username: function () {
-      if (!this.getCurrentUser) return 'Nobody'
-      
-      return this.getCurrentUser.username
-    },
-    loading: function () {
-      return this.authStatus === 'loading'
-    },
-    error: function () {
-      return this.authStatus === 'error'
+    status: function () {
+      return this.$store.getters.authStatus
     }
   },
   methods: {
@@ -142,15 +108,11 @@ export default {
   opacity: .9;
 }
 
-.user-panel-login {
-  color: black;
-}
-
 .welcome-section {
   width: 40%;
   padding: 40px;
   color: #FFF;
-  background-color: #004c00;
+  background-color: #003c71;
   border-radius: 30px 0 0 30px;
 }
 
@@ -190,7 +152,7 @@ hr {
 }
 
 .link:hover {
-  color: #004c00;
+  color: #003c71;
   background: #FFF;
 }
 
@@ -226,36 +188,19 @@ hr {
 
 .user-panel-div {
   margin: 0 auto;
-  text-align: center;
   width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.user-panel-row {
-  text-align: right;
-  display: flex;
-  justify-content: flex-end;
-}
-
-label {
-  display: flex;
-  align-items: center;
-}
-
-.form-section input {
+.user-panel-input {
+  height: 1em;
+  font-size: 20px;
+  margin: .5em;
+  border: none;
   color: #003C71;
   border-bottom: 2px solid #003C71;
-}
-
-.user-panel-input {
-  display: inline-block;
-  width: 72%;
-  height: 20px;
-  font-size: 20px;
-  margin: 10px;
-  border: none;
   background-color: transparent;
   outline: none;
 }
@@ -266,7 +211,6 @@ label {
   margin: 20px auto;
   border-radius: 5px;
   font-size: 20px;
-  cursor: pointer;
   color: #FFF;
   background-color: #003C71;
   border-color: #003C71;
@@ -275,9 +219,5 @@ label {
 .user-panel-button:hover {
   background-color: #376FB2;
   border-color: #376FB2;
-}
-
-.user-panel-button:focus {
-  outline: none;
 }
 </style>

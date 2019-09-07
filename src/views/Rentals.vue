@@ -3,16 +3,7 @@
     <div class='rental-box'>
       <p class='box-title'>My Rentals</p>
       <div v-if='!rentals.length'>
-        <div v-if='loading'>
-          <img class='loading' alt='Loading...' src='@/assets/loading.png' />
-        </div>
-        <div v-else-if='error'>
-          Something failed. Please try again.
-          <button class='' @click='reload'>Reload Page</button>
-        </div>
-        <div v-else>
-          <h3>You don't have any rentals.</h3>
-        </div>
+        <Skeleton :status='rentalStatus' :onReload='reload' />
       </div>
       <div class='table-box' v-else>
         <table>
@@ -43,25 +34,17 @@
               <td>{{ rental.rentalFee }}</td>
               <td>
                 <div v-if='!rental.timeRentedOut'>
-                  <div v-if='loading'>
-                    <img class='loading' alt='Loading...' src='@/assets/loading.png' />
-                  </div>
-                  <div v-else>
-                    <span @click.prevent='removeRental(rental._id)'>
-                      Delete
-                    </span>
-                  </div>
+                  <span @click.prevent='removeRental(rental._id)'>
+                    Delete
+                  </span>
                 </div>
               </td>
             </tr>
           </tbody>
         </table>
-        <button @click='reload'>
-          <div v-if='loading'>
-            <img class='loading' alt='Loading...' src='@/assets/loading.png'/>
-          </div>
-          <div v-else>Refresh</div>
-        </button>
+        <Button class='refresh' :status='rentalStatus' @click='reload'>
+          Refresh
+        </Button>
       </div>
     </div>
   </div>
@@ -69,9 +52,12 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import Skeleton from '@/components/Skeleton'
+import Button from '@/components/Button'
 
 export default {
   name: 'rentals',
+  components: { Skeleton, Button },
   created () {
     if (!this.rentals.length) this.fetchMyRentals()
   },
@@ -79,12 +65,6 @@ export default {
     ...mapGetters(['getRentals', 'rentalStatus']),
     rentals: function () {
       return this.getRentals
-    },
-    loading: function () {
-      return this.rentalStatus === 'loading'
-    },
-    error: function () {
-      return this.rentalStatus === 'error'
     }
   },
   methods: {
@@ -208,7 +188,7 @@ span:hover {
   transform: scale(1.02)
 }
 
-button {
+.refresh {
   margin: 20px auto;
   padding: 1em 3em;
   border-radius: 10px;
@@ -219,12 +199,12 @@ button {
   border-color: #006ccc;
 }
 
-button:hover {
+.refresh:hover {
   background-color: #003C71;
   border-color: #003C71;
 }
 
-button:focus {
+.refresh:focus {
   outline: none;
 }
 </style>

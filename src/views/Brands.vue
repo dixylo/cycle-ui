@@ -11,13 +11,7 @@
         We stock the most recognized cycle brands in the world to give you the best cycling experience.
       </p>
       <div v-if='!brands.length'>
-        <div v-if='loading'>
-          <img class='loading' alt='Loading...' src='@/assets/loading.png' />
-        </div>
-        <div v-if='error'>
-          Something failed. Please try again.
-          <button class='' @click='reload'>Reload Page</button>
-        </div>
+        <Skeleton :status='brandStatus' :onReload='fetchAllBrands' />
       </div>
       <div class='items' v-else>
         <div v-for='brand in brands' :key='brand._id'>
@@ -30,11 +24,12 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import Card from '@/components/Card.vue'
+import Card from '@/components/Card'
+import Skeleton from '@/components/Skeleton'
 
 export default {
   name: 'brands',
-  components: { Card },
+  components: { Card, Skeleton },
   created () {
     if (!this.brands.length) this.fetchAllBrands()
   },
@@ -42,20 +37,9 @@ export default {
     ...mapGetters(['getBrands', 'brandStatus']),
     brands: function () {
       return this.getBrands
-    },
-    loading: function () {
-      return this.brandStatus === 'loading'
-    },
-    error: function () {
-      return this.brandStatus === 'error'
     }
   },
-  methods: {
-    ...mapActions(['fetchAllBrands']),
-    reload () {
-      this.fetchAllBrands()
-    }
-  }
+  methods: mapActions(['fetchAllBrands'])
 }
 </script>
 

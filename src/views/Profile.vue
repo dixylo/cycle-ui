@@ -10,13 +10,7 @@
       <div class='form-section'>
         <p id='form-title'>My Profile</p>
         <div v-if='!user'>
-          <div v-if='loading'>
-            <img class='loading' alt='Loading...' src='@/assets/loading.png' />
-          </div>
-          <div v-if='error'>
-            Something failed. Please try again.
-            <button class='' @click='reload'>Reload Page</button>
-          </div>
+          <Skeleton :status='authStatus' :onReload='fetchMe' />
         </div>
         <div class='user-panel-div' v-else>
           <div class='user-panel-row'>
@@ -56,22 +50,25 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
+import Skeleton from '@/components/Skeleton'
 
 export default {
   name: 'profile',
+  components: { Skeleton },
   computed: {
-    ...mapGetters(['getCurrentUser']),
+    ...mapGetters(['getCurrentUser', 'authStatus']),
     user: function () {
       return this.getCurrentUser
     }
-  }
+  },
+  methods: mapActions(['fetchMe'])
 }
 </script>
 
 <style scoped>
 .user {
-  background-image: url('../assets/login.jpg');
+  background-image: url('../assets/profile.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -92,7 +89,7 @@ export default {
   width: 40%;
   padding: 40px;
   color: #FFF;
-  background-color: #003c71;
+  background-color: #004c00;
   border-radius: 30px 0 0 30px;
 }
 
@@ -106,7 +103,7 @@ export default {
 
 .form-section {
   width: 60%;
-  color: #003c71;
+  color: #004c00;
   background-color: #FFF;
   border-radius: 0 30px 30px 0;
   display: flex;
@@ -156,8 +153,8 @@ label {
 }
 
 .form-section input {
-  color: #003c71;
-  border-bottom: 2px solid #003c71;
+  color: #004c00;
+  border-bottom: 2px solid #004c00;
 }
 
 .user-panel-input {

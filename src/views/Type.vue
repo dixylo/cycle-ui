@@ -1,13 +1,10 @@
 <template>
   <div class='container'>
     <div v-if='!type'>
-      <div v-if='loading'>
-        <img class='loading' alt='Loading...' src='@/assets/loading.png' />
-      </div>
-      <div v-if='error'>
-        Something failed. Please try again.
-        <button class='' @click='reload'>Reload Page</button>
-      </div>
+      <Skeleton
+        :status='typeStatus'
+        :onReload='() => this.fetchTypeById(this.$route.params.id)'
+      />
     </div>
     <div v-else>
       <div class='data'>
@@ -32,7 +29,7 @@
             <Card :data='model' field='model' />
           </div>
         </div>
-        <div v-else>
+        <div class='no-cards' v-else>
           <h2>Oops! We haven't got any models of this type yet.</h2>
         </div>
       </div>
@@ -42,11 +39,12 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import Card from '@/components/Card.vue'
+import Card from '@/components/Card'
+import Skeleton from '@/components/Skeleton'
 
 export default {
   name: 'type',
-  components: { Card },
+  components: { Card, Skeleton },
   computed: {
     ...mapGetters(['getTypes', 'getTheType', 'typeStatus']),
     type: function () {
@@ -59,20 +57,9 @@ export default {
         this.fetchTypeById(id)
       }
       return this.getTheType
-    },
-    loading: function () {
-      return this.typeStatus === 'loading'
-    },
-    error: function () {
-      return this.typeStatus === 'error'
     }
   },
-  methods: {
-    ...mapActions(['fetchTypeById']),
-    reload () {
-      this.fetchTypeById(this.$route.params.id)
-    }
-  }
+  methods: mapActions(['fetchTypeById'])
 }
 </script>
 
@@ -200,5 +187,9 @@ export default {
 .card-container {
   background-color: azure;
   padding: 100px;
+}
+
+.no-cards {
+  padding: 3em;
 }
 </style>

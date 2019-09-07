@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     handleClick(index) {
-      this.onClick(index)
+      if (this.onClick) this.onClick(index)
     }
   }
 }
