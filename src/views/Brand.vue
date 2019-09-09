@@ -27,11 +27,13 @@
           <p><span>Introduction:</span> {{ brand.description }}</p>
         </div>
       </div>
-      <div class='model-box'>
+      <div class='item-box'>
         <p class='box-title'>Models</p>
-        <div class='card-container' v-if='brand.models.length'>
-          <div v-for='model in brand.models' :key='model._id'>
-            <Card :data='model' field='model' />
+        <div class='card-container-background' v-if='brand.models.length'>
+          <div class='card-container'>
+            <div v-for='model in brand.models' :key='model._id'>
+              <Card :data='model' field='model' />
+            </div>
           </div>
         </div>
         <div class='no-cards' v-else>
@@ -105,7 +107,7 @@ export default {
 .overview {
   max-width: 1024px;
   margin: 0 auto;
-  padding: 50px;
+  padding: 50px 0;
   overflow: hidden;
   display: flex;
   justify-content: space-around;
@@ -138,6 +140,7 @@ export default {
 .metadata p {
   font-size: 30px;
   margin: .5em;
+  text-align: left;
 }
 
 .introduction {
@@ -156,37 +159,14 @@ export default {
   text-align: justify;
 }
 
-.model-box {
-  padding: 80px;
-}
-
-.box-title {
-  color: #003C71;
-  font-size: 50px;
-  font-style: italic;
-  font-weight: bold;
-  margin: 0;
+.item-box {
   position: relative;
+  padding: 3rem 0;
+  width: 100%;
+  background-color: #FFF;
 }
 
-.box-title::after {
-  content: '__';
-  color: #00A9E0;
-  display: block;
-  font-size: 100px;
-  font-style: normal;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1;
-}
-
-.model-box {
-  position: relative;
-}
-
-.model-box::before {
+.item-box::before {
   content: '';
 	width: 0;
 	height: 0;
@@ -201,12 +181,130 @@ export default {
 	border-right: 30vw solid #00b200;
 }
 
-.card-container {
-  background-color: azure;
-  padding: 100px;
+.box-title::after {
+  bottom: -10%;
 }
 
 .no-cards {
   padding: 3em;
+}
+
+@media screen and (max-width: 940px) {
+  .metadata span {
+    font-size: 18px;
+    margin-right: .5em;
+  }
+
+  .metadata p {
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .metadata span {
+    font-size: 15px;
+  }
+
+  .metadata p {
+    font-size: 20px;
+  }
+
+  .image-container {
+    width: 250px;
+  }
+
+  .introduction span {
+    font-size: 12px;
+  }
+
+  .introduction p {
+    font-size: 15px;
+  }
+
+  .item-box {
+    padding-top: 2rem;
+  }
+
+  .item-box::before {
+    border-top-width: 30px;
+    border-bottom-width: 30px;
+  }
+  
+  .box-title {
+    font-size: 40px;
+  }
+
+  .box-title::after {
+    font-size: 80px;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .overview {
+    padding: 25px 0;
+  }
+
+  .metadata span {
+    font-size: 12px;
+  }
+
+  .metadata p {
+    font-size: 15px;
+  }
+
+  .image-container {
+    width: 200px;
+  }
+
+  .introduction span {
+    font-size: 12px;
+  }
+
+  .introduction p {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .data {
+    padding: 30px;
+  }
+
+  .overview {
+    padding: 5px 0;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-container {
+    width: 250px;
+  }
+
+  .metadata {
+    width: 100%;
+  }
+
+  .metadata p {
+    margin: .5em 0;
+  }
+
+  .item-box::before {
+    border-top-width: 25px;
+    border-bottom-width: 25px;
+  }
+
+  .box-title {
+    font-size: 30px;
+  }
+
+  .box-title::after {
+    font-size: 60px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .image-container {
+    width: 200px;
+  }
 }
 </style>

@@ -26,12 +26,12 @@
           <p><span>Introduction:</span> {{ model.description }}</p>
         </div>
       </div>
-      <div class='cycle-box'>
+      <div class='item-box'>
         <p class='box-title'>Cycles</p>
         <div class='no-cards' v-if='!model.cycles.length'>
           <h2>Oops! We haven't got any cycles of this model yet.</h2>
         </div>
-        <div class='items' v-else>
+        <div class='card-container' v-else>
           <form
             class='user-panel-div'
             @submit.prevent='handleSubmit'
@@ -184,7 +184,7 @@ export default {
 .overview {
   max-width: 1024px;
   margin: 0 auto;
-  padding: 50px;
+  padding: 50px 0;
   overflow: hidden;
   display: flex;
   justify-content: space-around;
@@ -193,8 +193,7 @@ export default {
 }
 
 .image-container {
-  width: 600px;
-  flex: 1;
+  width: 500px;
 }
 
 .image-container img {
@@ -208,8 +207,6 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  flex: 1;
-  padding: 2em;
 }
 
 .metadata span {
@@ -220,6 +217,7 @@ export default {
 .metadata p {
   font-size: 30px;
   margin: .5em;
+  text-align: left;
 }
 
 .introduction {
@@ -238,11 +236,14 @@ export default {
   text-align: justify;
 }
 
-.cycle-box {
+.item-box {
   position: relative;
+  padding: 6rem 0 3rem;
+  width: 100%;
+  background-color: #FFF;
 }
 
-.cycle-box::before {
+.item-box::before {
   content: '';
 	width: 0;
 	height: 0;
@@ -258,18 +259,9 @@ export default {
   z-index: 1;
 }
 
-.box-title {
-  position: relative;
-  color: #003C71;
-  font-size: 50px;
-  font-style: italic;
-  font-weight: bold;
-  margin: 0 auto;
-  padding: 140px 0 0;
-}
-
-.box-title::before {
+.item-box::after {
   content: '';
+  width: 100vw;
 	height: 100px;
   display: block;
   position: absolute;
@@ -281,31 +273,18 @@ export default {
 }
 
 .box-title::after {
-  content: '__';
-  color: #00A9E0;
-  display: block;
-  font-size: 100px;
-  font-style: normal;
-  position: absolute;
-  left: 50%;
-  bottom: -35%;
-  transform: translateX(-50%);
+  bottom: -10%;
 }
 
-.items {
-  margin: 0 auto;
-  padding: 100px;
-  max-width: 1024px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+.card-container {
+  padding: 40px 0;
   background-color: azure;
 }
 
 table {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  margin: 30px auto;
+  margin: 1.5em auto;
   background-color: white;
 }
 
@@ -319,12 +298,12 @@ tr:hover {
 
 th, td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: .4em;
 }
 
 th {
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding: .6em .4em;
+  /* padding-bottom: 12px; */
   background-color: #4CAF50;
   color: white;
 }
@@ -379,5 +358,193 @@ button:hover {
 
 .no-cards {
   padding: 3em;
+}
+
+@media screen and (max-width: 1120px) {
+  .item-box {
+    padding-top: 4rem
+  }
+
+  .item-box::before {
+    border-top-width: 40px;
+    border-bottom-width: 80px;
+  }
+
+  .item-box::after {
+    height: 80px;
+  }
+
+  .image-container {
+    width: 400px;
+  }
+
+  .metadata span {
+    font-size: 18px;
+  }
+
+  .metadata p {
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .image-container {
+    width: 350px;
+  }
+
+  .metadata span {
+    font-size: 15px;
+  }
+
+  .metadata p {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .overview {
+    padding: 10px 0;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-container {
+    width: 400px;
+  }
+
+  .metadata {
+    width: 100%;
+  }
+  
+  .metadata p {
+    margin: .5em 0;
+  }
+
+  .item-box {
+    padding-top: 3rem;
+  }
+
+  .item-box::before {
+    border-top-width: 30px;
+    border-bottom-width: 60px;
+  }
+
+  .item-box::after {
+    height: 70px;
+  }  
+  
+  .box-title {
+    font-size: 40px;
+  }
+
+  .box-title::after {
+    font-size: 80px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .data {
+    padding: 30px;
+  }
+
+  .image-container {
+    width: 350px;
+  }  
+
+  .item-box::before {
+    border-top-width: 25px;
+    border-bottom-width: 50px;
+  }
+
+  .item-box::after {
+    height: 60px;
+  } 
+
+  .box-title {
+    font-size: 30px;
+  }
+
+  .box-title::after {
+    font-size: 60px;
+  }
+
+  label {
+    font-size: 25px;
+  }
+
+  #datepicker {
+    font-size: 25px;
+  }
+
+  button {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  table {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .overview {
+    padding: 7.5px 0;
+  }
+
+  .image-container {
+    width: 300px;
+  }
+
+  .metadata span {
+    font-size: 12px;
+  }
+
+  .metadata p {
+    font-size: 15px;
+  }
+
+  .introduction span {
+    font-size: 12px;
+  }
+
+  .introduction p {
+    font-size: 15px;
+  }
+
+  label {
+    font-size: 20px;
+  }
+
+  table {
+    font-size: 15px;
+  }
+
+  #datepicker {
+    font-size: 20px;
+  }
+
+  button {
+    font-size: 15px;
+    border-width: 2px;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .image-container {
+    width: 250px;
+  }
+
+  label {
+    font-size: 18px;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  #datepicker {
+    font-size: 15px;
+  }  
 }
 </style>

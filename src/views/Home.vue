@@ -6,11 +6,11 @@
     <div id='placeholder'></div>
     <div id='brand-box' class='item-box'>
       <p class='box-title'>Find Your Favourite Brand</p>
-      <div class='item-list'>
+      <div class='card-container-background'>
         <div v-if='!brands.length'>
           <Skeleton :status='brandStatus' :onReload='fetchAllBrands' />
         </div>
-        <div class='items' v-else>
+        <div class='card-container' v-else>
           <div v-for='brand in brands' :key='brand._id'>
             <Card :data='brand' field='brand' />
           </div>
@@ -20,11 +20,11 @@
     <div class='image-section'>
       <div id='middle-image' class='image-box'></div>
       <div class='image-text'>
-        <p id='mp1'>Crazy about bikes,<br>but balking at the price?</p>
-        <p id='mp2'>
+        <p id='middle-p-one'>Crazy about bikes,<br>but balking at the price?</p>
+        <p id='middle-p-two'>
           Congrats! You are visiting the right place, where you can try the most popular models of world famous brands at an incredably low rate.
         </p>
-        <p id='mp3'>Check out our story and come visit us</p>
+        <p id='middle-p-three'>Check out our story and come visit us</p>
         <div id='link-box'>
           <router-link class='link' to='/about'>About Us</router-link>
           <router-link class='link' to='/contact'>Contact Us</router-link>
@@ -33,11 +33,11 @@
     </div>
     <div id='type-box' class='item-box'>
       <p class='box-title'>Choose a Type You Need</p>
-      <div class='item-list'>
+      <div class='card-container-background'>
         <div v-if='!types.length'>
           <Skeleton :status='typeStatus' :onReload='fetchAllTypes' />
         </div>
-        <div class='items' v-else>
+        <div class='card-container' v-else>
           <div v-for='type in types' :key='type._id'>
             <Card :data='type' field='type' />
           </div>
@@ -47,9 +47,9 @@
     <div class='image-section'>
       <div id='bottom-image' class='image-box'></div>
       <div class='image-text'>
-        <p id='bp1'>"Nothing compares to the simple pleasure of a bike ride."</p>
-        <p id='bp2'>—— John F. Kennedy</p>
-        <p id='bp3'>Rent a bike and start your journey now</p>
+        <p id='bottom-p-one'>"Nothing compares to the simple pleasure of a bike ride."</p>
+        <p id='bottom-p-two'>—— John F. Kennedy</p>
+        <p id='bottom-p-three'>Rent a bike and start your journey now</p>
         <div id='link-box'>
           <router-link class='link' to='/login'>Log in</router-link>
           <router-link class='link' to='/signup'>Sign up</router-link>
@@ -109,7 +109,7 @@ export default {
 <style scoped>
 #carousel {
   position: fixed;
-  top: 3.8rem;
+  top: 3.71rem;
   left: 0;
   right: 0;
 }
@@ -118,7 +118,7 @@ export default {
   position: relative;
   display: block;
   width: 100%;
-  padding-top: 45%;
+  padding-top: 44.34%;
   z-index: -1;
 }
 
@@ -158,8 +158,9 @@ export default {
   max-width: 900px;
   height: 100%;
   display: flex;
-  flex-flow: column nowrap;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .image-text p {
@@ -170,29 +171,29 @@ export default {
   text-shadow: 2px 2px 4px #000000;
 }
 
-#mp1 {
+#middle-p-one {
   font-weight: 600;
 }
 
-#mp2 {
+#middle-p-two {
   font-size: 40px;
 }
 
-#mp3 {
+#middle-p-three {
   font-weight: bold;
 }
 
-#bp1 {
+#bottom-p-one {
   font-style: italic;
   font-weight: 600;
 }
 
-#bp2 {
+#bottom-p-two {
   font-size: 30px;
   font-weight: bold;
 }
 
-#bp3 {
+#bottom-p-three {
   font-weight: bold;
 }
 
@@ -210,7 +211,7 @@ export default {
   font-weight: bold;
   padding: 1em 3em;
   background: transparent;
-  border: 4px solid #fff;
+  border: .16em solid #fff;
   border-radius: 2em;
   margin: 0 3em;
   text-decoration: none;
@@ -225,7 +226,7 @@ export default {
 .item-box {
   position: relative;
   z-index: 1;
-  background: white;
+  background-color: #fff;
   padding: 6rem 0;
 }
 
@@ -254,7 +255,7 @@ export default {
   border-bottom: 50px solid transparent;
 	border-left: 70vw solid #376FB2;
 	border-right: 30vw solid #00A9E0;
-  top: -5px;
+  top: 0;
 }
 
 #brand-box::after {
@@ -282,37 +283,220 @@ export default {
 }
 
 .box-title {
-  color: #003C71;
-  font-size: 50px;
-  font-style: italic;
-  font-weight: bold;
-  margin: 0;
-  padding-bottom: 2em;
-  position: relative;
+  padding-bottom: 1em;
 }
 
 .box-title::after {
-  content: '__';
-  color: #00A9E0;
-  display: block;
-  font-size: 100px;
-  font-style: normal;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: -10%;
 }
 
-.item-list {
-  position: relative;
-  max-width: 1920px;
-  z-index: 1;
-  background-color: azure;
+.card-container {
+  max-width: 100vw;
 }
 
-.items {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+@media screen and (max-width: 900px) {
+  #brand-box::before {
+    border-top-width: 40px;
+    border-bottom-width: 40px;
+  }
+
+  #brand-box::after {
+    border-top-width: 40px;
+    border-bottom-width: 40px;
+  }
+
+  #type-box::before {
+    border-top-width: 40px;
+    border-bottom-width: 40px;
+  }
+
+  #type-box::after {
+    border-top-width: 40px;
+    border-bottom-width: 40px;
+  }
+
+  .box-title {
+    font-size: 40px;
+  }
+
+  .box-title::after {
+    font-size: 80px;
+  }
+
+  .image-box {
+    height: 600px;
+  }
+
+  #middle-p-one {
+    font-size: 40px;
+  }
+
+  #middle-p-two {
+    width: 640px;
+    font-size: 30px;
+  }
+
+  #middle-p-three {
+    font-size: 40px;
+  }
+
+  #bottom-p-one {
+    width: 640px;
+    font-size: 40px;
+  }
+
+  #bottom-p-two {
+    font-size: 20px;
+  }
+
+  #bottom-p-three {
+    font-size: 40px;
+  }
+
+  .link {
+    font-size: 20px;
+    padding: 1em 3em;
+    border-radius: 2em;
+    margin: 0 3em;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  #brand-box::before {
+    border-top-width: 30px;
+    border-bottom-width: 30px;
+  }
+
+  #brand-box::after {
+    border-top-width: 30px;
+    border-bottom-width: 30px;
+  }
+
+  #type-box::before {
+    border-top-width: 30px;
+    border-bottom-width: 30px;
+  }
+
+  #type-box::after {
+    border-top-width: 30px;
+    border-bottom-width: 30px;
+  }
+
+  .box-title {
+    font-size: 30px;
+  }
+
+  .box-title::after {
+    font-size: 60px;
+  }
+
+  .image-box {
+    height: 400px;
+  }
+
+  #middle-p-one {
+    font-size: 30px;
+  }
+
+  #middle-p-two {
+    width: 420px;
+    font-size: 20px;
+  }
+
+  #middle-p-three {
+    font-size: 30px;
+  }
+
+  #bottom-p-one {
+    width: 500px;
+    font-size: 30px;
+  }
+
+  #bottom-p-two {
+    font-size: 15px;
+  }
+
+  #bottom-p-three {
+    font-size: 30px;
+  }
+
+  .link {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .item-box {
+    padding: 50px 0;
+  }
+
+  #brand-box::before {
+    border-top-width: 20px;
+    border-bottom-width: 20px;
+  }
+
+  #brand-box::after {
+    border-top-width: 20px;
+    border-bottom-width: 20px;
+  }
+
+  #type-box::before {
+    border-top-width: 20px;
+    border-bottom-width: 20px;
+  }
+
+  #type-box::after {
+    border-top-width: 20px;
+    border-bottom-width: 20px;
+  }
+
+  .box-title {
+    font-size: 20px;
+  }
+
+  .box-title::after {
+    font-size: 40px;
+  }
+
+  .image-box {
+    height: 320px;
+  }
+
+  #middle-p-one {
+    font-size: 20px;
+  }
+
+  #middle-p-two {
+    width: 320px;
+    font-size: 15px;
+  }
+
+  #middle-p-three {
+    font-size: 20px;
+  }
+
+  #bottom-p-one {
+    width: 350px;
+    font-size: 20px;
+  }
+
+  #bottom-p-two {
+    font-size: 12px;
+  }
+
+  #bottom-p-three {
+    font-size: 20px;
+  }
+
+  .link {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .link {
+    padding: 1em 2em;
+    margin: 0 2em;
+  }
 }
 </style>

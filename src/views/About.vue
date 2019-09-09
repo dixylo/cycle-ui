@@ -4,7 +4,7 @@
       <div class='image-box'>
         <img alt='About Cycly' src='@/assets/hero_about.webp' />
       </div>
-      <p class='box-title'>About Cycly</p>
+      <p class='page-title'>About Cycly</p>
     </div>
     <div class='timeline-box'>
       <div class="timeline">
@@ -65,19 +65,6 @@
 
 .image-box img {
   width: 100%;
-}
-
-.box-title {
-  color: #FFF;
-  font-size: 60px;
-  font-weight: bold;
-  text-align: left;
-  text-shadow: 2px 2px 4px #000000;
-  position: absolute;
-  left: 1em;
-  right: 1em;
-  bottom: .5em;
-  border-bottom: 3px solid #FFF;
 }
 
 /* *********************** */

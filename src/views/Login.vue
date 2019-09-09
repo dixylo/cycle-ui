@@ -5,7 +5,7 @@
         <p id='wp1'>Welcome back!</p>
         <p id='wp2'>Cycly is ready to give you the best cycle-renting service. Go enjoy cycling.</p>
         <hr>
-        <p id='wp3'>New to Cycly?<br>Why not sign up and try our world top cycles?</p>
+        <p id='wp3'>New to Cycly? Why not sign up and try our world top cycles?</p>
         <router-link class='link' to='/signup'>Sign up</router-link>
       </div>
       <div class='form-section'>
@@ -91,6 +91,8 @@ export default {
 
 <style scoped>
 .user {
+  box-sizing: border-box;
+  padding: 50px;
   background-image: url('../assets/login.jpg');
   background-position: center;
   background-repeat: no-repeat;
@@ -100,7 +102,6 @@ export default {
 }
 
 .user-panel {
-  width: 70%;
   max-width: 1024px;
   margin: auto;
   display: flex;
@@ -125,6 +126,8 @@ export default {
 }
 
 #wp3 {
+  width: 15em;
+  margin: 1em auto;
   font-size: 15px;
 }
 
@@ -219,5 +222,58 @@ hr {
 .user-panel-button:hover {
   background-color: #376FB2;
   border-color: #376FB2;
+}
+
+@media screen and (max-width: 750px) {
+  .user-panel {
+    flex-direction: column;
+  }
+
+  .welcome-section {
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 30px 30px 0 0;
+    padding-bottom: 50px;
+  }
+
+  #wp2 {
+    width: 18em;
+  }
+
+  .form-section {
+    width: 100%;
+    border-radius: 0 0 30px 30px;
+    padding: 30px 0;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .user {
+    padding: 0;
+  }
+
+  .user-panel {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .welcome-section {
+    border-radius: 0;
+  }
+
+  #wp2 {
+    margin: 1em auto;
+  }
+
+  .form-section {
+    border-radius: 0;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  #wp2 {
+    width: 12em;
+  }
 }
 </style>

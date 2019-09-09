@@ -4,18 +4,20 @@
       <div class='image-box'>
         <img alt='All Brands' src='@/assets/hero_brands.webp' />
       </div>
-      <p class='box-title'>World Top Brands</p>
+      <p class='page-title'>World Top Brands</p>
     </div>
     <div class='item-box'>
-      <p class='preface'>
+      <p class='box-title'>
         We stock the most recognized cycle brands in the world to give you the best cycling experience.
       </p>
       <div v-if='!brands.length'>
         <Skeleton :status='brandStatus' :onReload='fetchAllBrands' />
       </div>
-      <div class='items' v-else>
-        <div v-for='brand in brands' :key='brand._id'>
-          <Card :data='brand' field='brand' />
+      <div class='card-container-background' v-else>
+        <div class='card-container'>
+          <div v-for='brand in brands' :key='brand._id'>
+            <Card :data='brand' field='brand' />
+          </div>
         </div>
       </div>
     </div>
@@ -46,13 +48,13 @@ export default {
 <style scoped>
 .hero {
   width: 100%;
-  padding-top: 45%;
+  padding-top: 44.8%;
   position: relative;
 }
 
 .image-box {
   position: fixed;
-  top: 3.65rem;
+  top: 3.71rem;
   left: 0;
   right: 0;
 }
@@ -61,21 +63,9 @@ export default {
   width: 100%;
 }
 
-.box-title {
-  color: #FFF;
-  font-size: 60px;
-  font-weight: bold;
-  text-align: left;
-  text-shadow: 2px 2px 4px #000000;
-  position: absolute;
-  left: 1em;
-  right: 1em;
-  bottom: .5em;
-  border-bottom: 3px solid #FFF;
-}
-
 .item-box {
   width: 100%;
+  padding: 6rem 0 3rem;
   position: relative;
   background-color: #FFF;
 }
@@ -86,7 +76,7 @@ export default {
 	height: 0;
   display: block;
   position: absolute;
-  top: -5px;
+  top: 0;
   left: 0;
   right: 0;
 	border-top: 50px solid #0076b2;
@@ -96,19 +86,10 @@ export default {
   z-index: 1;
 }
 
-.preface {
-  position: relative;
-  color: #003C71;
-  font-size: 40px;
-  font-weight: 400;
-  margin: 0 auto;
-  padding: 140px 0 0;
-  max-width: 25em;
-}
-
-.preface::before {
+.item-box::after {
   content: '';
-	height: 95px;
+  width: 100vw;
+	height: 100px;
   display: block;
   position: absolute;
   top: 0;
@@ -118,25 +99,98 @@ export default {
   z-index:0;
 }
 
-.preface::after {
-  content: '__';
-  color: #00A9E0;
-  display: block;
-  font-size: 100px;
+.box-title {
+  padding: 1.5em 0;
+  max-width: 25em;
+  font-size: 40px;
   font-style: normal;
-  position: absolute;
-  bottom: -25%;
-  left: 50%;
-  transform: translateX(-50%);
+  font-weight: 400;
 }
 
-.items {
-  margin: 0 auto;
-  padding: 100px;
-  max-width: 1024px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  background-color: azure;
+@media screen and (max-width: 1024px) {
+  .page-title {
+    font-size: 50px;
+  }
+
+  .item-box::before {
+    border-top-width: 40px;
+    border-bottom-width: 80px;
+  }
+
+  .box-title {
+    font-size: 30px;
+  }
+
+  .box-title::after {
+    font-size: 80px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .page-title {
+    font-size: 40px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .page-title {
+    font-size: 30px;
+  }
+
+  .item-box {
+    padding: 4rem 0;
+  }
+
+  .item-box::before {
+    border-top-width: 30px;
+    border-bottom-width: 60px;
+  }
+
+  .item-box::after {
+    height: 70px;
+  }
+
+  .box-title {
+    font-size: 22px;
+  }
+
+  .box-title::after {
+    font-size: 50px;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .page-title {
+    font-size: 25px;
+  }
+
+  .item-box {
+    padding: 3rem 0;
+  }
+
+  .item-box::before {
+    border-top-width: 20px;
+    border-bottom-width: 40px;
+  }
+
+  .item-box::after {
+    height: 50px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .box-title {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .page-title {
+    font-size: 20px;
+  }
+
+  .box-title {
+    font-size: 15px;
+  }
 }
 </style>

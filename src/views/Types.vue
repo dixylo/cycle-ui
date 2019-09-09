@@ -4,18 +4,20 @@
       <div class='image-box'>
         <img alt='All Types' src='@/assets/hero_types.webp' />
       </div>
-      <p class='box-title'>Wide Variety of Types</p>
+      <p class='page-title'>Wide Variety of Types</p>
     </div>
     <div class='item-box'>
-      <p class='preface'>
+      <p class='box-title'>
         Where there are roads, there'll be adventurous cycling souls. Let us equip you to conquer the unconquered terrain.
       </p>
       <div v-if='!types.length'>
         <Skeleton :status='typeStatus' :onReload='fetchAllTypes' />
       </div>
-      <div class='items' v-else>
-        <div v-for='type in types' :key='type._id'>
-          <Card :data='type' field='type' />
+      <div class='card-container-background' v-else>
+        <div class='card-container'>
+          <div v-for='type in types' :key='type._id'>
+            <Card :data='type' field='type' />
+          </div>
         </div>
       </div>
     </div>
@@ -46,13 +48,13 @@ export default {
 <style scoped>
 .hero {
   width: 100%;
-  padding-top: 45%;
+  padding-top: 44.8%;
   position: relative;
 }
 
 .image-box {
   position: fixed;
-  top: 3.65rem;
+  top: 3.71rem;
   left: 0;
   right: 0;
 }
@@ -61,21 +63,13 @@ export default {
   width: 100%;
 }
 
-.box-title {
-  color: #FFF;
-  font-size: 60px;
-  font-weight: bold;
+.page-title {
   text-align: right;
-  text-shadow: 2px 2px 4px #000000;
-  position: absolute;
-  left: 1em;
-  right: 1em;
-  bottom: .5em;
-  border-bottom: 3px solid #FFF;
 }
 
 .item-box {
   width: 100%;
+  padding: 6rem 0 3rem;
   position: relative;
   background-color: #FFF;
 }
@@ -86,7 +80,7 @@ export default {
 	height: 0;
   display: block;
   position: absolute;
-  top: -5px;
+  top: 0;
   left: 0;
   right: 0;
 	border-top: 50px solid #007f26;
@@ -96,18 +90,9 @@ export default {
   z-index: 1;
 }
 
-.preface {
-  position: relative;
-  color: #003C71;
-  font-size: 40px;
-  font-weight: 400;
-  margin: 0 auto;
-  padding: 150px 0 0;
-  max-width: 28em;
-}
-
-.preface::before {
+.item-box::after {
   content: '';
+  width: 100vw;
 	height: 100px;
   display: block;
   position: absolute;
@@ -118,25 +103,106 @@ export default {
   z-index:0;
 }
 
-.preface::after {
-  content: '__';
-  color: #00A9E0;
-  display: block;
-  font-size: 100px;
+.box-title {
+  padding: 1.5em 0;
+  max-width: 28em;
+  font-size: 40px;
   font-style: normal;
-  position: absolute;
-  left: 50%;
-  bottom: -25%;
-  transform: translateX(-50%);
+  font-weight: 400;
 }
 
-.items {
-  margin: 0 auto;
-  padding: 100px;
-  max-width: 1024px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  background-color: azure;
+@media screen and (max-width: 1080px) {
+  .page-title {
+    font-size: 50px;
+  }
+
+  .item-box::before {
+    border-top-width: 40px;
+    border-bottom-width: 80px;
+  }
+
+  .item-box::after {
+    height: 100px;
+  }
+
+  .box-title {
+    font-size: 30px;
+  }
+
+  .box-title::after {
+    font-size: 80px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .page-title {
+    font-size: 40px;
+  }
+}
+
+@media screen and (max-width: 810px) {
+  .page-title {
+    font-size: 30px;
+  }
+
+  .item-box {
+    padding: 4rem 0;
+  }
+
+  .item-box::before {
+    border-top-width: 30px;
+    border-bottom-width: 60px;
+  }
+
+  .item-box::after {
+    height: 70px;
+  }
+
+  .box-title {
+    font-size: 22px;
+  }
+
+  .box-title::after {
+    font-size: 50px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .page-title {
+    font-size: 25px;
+  }
+
+  .item-box {
+    padding: 3rem 0;
+  }
+
+  .item-box::before {
+    border-top-width: 20px;
+    border-bottom-width: 40px;
+  }
+
+  .item-box::after {
+    height: 50px;
+  }
+
+  .box-title {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .page-title {
+    font-size: 20px;
+  }
+
+  .box-title {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .box-title {
+    width: 300px;
+  }
 }
 </style>

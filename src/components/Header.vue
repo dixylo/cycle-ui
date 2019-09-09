@@ -1,42 +1,44 @@
 <template>
-  <div id="header">
-    <div class='navbar-collapsed'>
-      <router-link class='nav-logo' to='/'>
-        <!-- <img alt='icon' src='@/assets/logo.png' /> -->
-        <span><b>CYCLY</b></span>
-      </router-link>
-      <button class='nav-button' @click='toggleMenu'>
-        <span class='tribar'></span>
-        <span class='tribar'></span>
-        <span class='tribar'></span>
-      </button>
-    </div>
-    <div 
-      class='navbar-menu'
-      :class="{responsive: isCollapsedMenuVisible}"
-    >
-      <div class='nav-feature'>
-        <router-link class='nav-item' to='/'>Home</router-link>
-        <router-link class='nav-item' to='/brands'>Brands</router-link>
-        <router-link class='nav-item' to='/types'>Types</router-link>
-        <router-link class='nav-item' to='/about'>About</router-link>
-        <router-link class='nav-item' to='/contact'>Contact</router-link>
+  <div id='header'>
+    <div class='wrapper'>
+      <div class='navbar-collapsed'>
+        <router-link class='nav-logo' to='/'>
+          <span><b>CYCLY</b></span>
+        </router-link>
+        <button class='nav-button' @click='toggleMenu'>
+          <div class='bar-one' :class='{ cross: isCollapsedMenuVisible }'></div>
+          <div class='bar-two' :class='{ cross: isCollapsedMenuVisible }'></div>
+          <div class='bar-three' :class='{ cross: isCollapsedMenuVisible }'></div>
+        </button>
       </div>
-      <hr class='nav-hr' />
-      <div class='nav-user'>
-        <div v-if='isLoggedIn'>
-          <span v-if='isAdminLoggedIn'>
-            <router-link class='nav-item' to='/admin'>Admin</router-link>
-          </span>
-          <span v-else>
-            <router-link class='nav-item' to='/rentals'>Rentals</router-link>
-          </span>
-          <router-link class='nav-item' to='/profile'>Me</router-link>
-          <span class='nav-item' @click.prevent='logout'>Log out</span>
+      <div
+        class='navbar-menu'
+        :class='{ responsive: isCollapsedMenuVisible }'
+        @click.prevent='closeMenu'
+      >
+        <div>
+          <router-link class='nav-item' to='/'>Home</router-link>
+          <router-link class='nav-item' to='/brands'>Brands</router-link>
+          <router-link class='nav-item' to='/types'>Types</router-link>
+          <router-link class='nav-item' to='/about'>About</router-link>
+          <router-link class='nav-item' to='/contact'>Contact</router-link>
         </div>
-        <div v-else>
-          <router-link class='nav-item' to='/login'>Log in</router-link>
-          <router-link class='nav-item' to='/signup'>Sign up</router-link>
+        <hr class='nav-hr' />
+        <div>
+          <div v-if='isLoggedIn'>
+            <span v-if='isAdminLoggedIn'>
+              <router-link class='nav-item' to='/admin'>Admin</router-link>
+            </span>
+            <span v-else>
+              <router-link class='nav-item' to='/rentals'>Rentals</router-link>
+            </span>
+            <router-link class='nav-item' to='/profile'>Me</router-link>
+            <span class='nav-item' @click.prevent='logout'>Log out</span>
+          </div>
+          <div v-else>
+            <router-link class='nav-item' to='/login'>Log in</router-link>
+            <router-link class='nav-item' to='/signup'>Sign up</router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -60,8 +62,11 @@ export default {
     }
   },
   methods: {
-    toggleMenu() {
+    toggleMenu () {
       this.isCollapsedMenuVisible = !this.isCollapsedMenuVisible
+    },
+    closeMenu () {
+      this.isCollapsedMenuVisible = false
     },
     logout: function () {
       this.$store.dispatch('logout')
@@ -74,21 +79,74 @@ export default {
 
 <style scoped>
 #header {
-  background-color: #00284c;
-  overflow: hidden;
-  display: flex;
-  flex-direction: row;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  height: 60px;
+  height: 3.7rem;
+  background-color: #00284c;
+}
+
+.wrapper {
+  margin: 0 auto;
+  padding: 0 1rem;
+  max-width: 1300px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .navbar-collapsed {
   display: flex;
   justify-content: space-between;
+}
+
+.nav-logo {
+  padding: 1rem 1.5rem;
+  color: #f2f2f2;
+  text-decoration: none;
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-button {
+  position: relative;
+  z-index: 200;
+  margin-right: 26px;
+  padding: 0;
+  border: none;
+  display: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.nav-button:focus {
+  outline: 0;
+}
+
+.bar-one, .bar-two, .bar-three {
+  width: 30px;
+  height: 3px;
+  margin: 8px 0;
+  border-radius: 1.5px;
+  background-color: #fff;
+  transition: 0.4s;
+}
+
+.cross.bar-one {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-8px, 7px);
+}
+
+.cross.bar-two {
+  opacity: 0;
+}
+
+.cross.bar-three {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
 }
 
 .navbar-menu {
@@ -98,77 +156,25 @@ export default {
 }
 
 .nav-item {
+  padding: 1rem 1.5rem;
+  display: inline-block;
   color: #f2f2f2;
   text-decoration: none;
-  font-size: 20px;
   text-align: center;
-  padding: 14px 26px;
-  display: inline-block;
 }
 
 .nav-item:hover {
-  color: #3e3b49;
-  background-color: #f2f2f2;
-  border-radius: 5px;
+  background-color: #003666;
   cursor: pointer;
 }
 
-.nav-button {
-  margin-right: 26px;
-  display: none;
-  padding: 0;
-  border: none;
-  border-radius: 5px;
-  background: transparent;
-}
-
-.nav-button:focus {
-  outline: 0;
-}
-
-.nav-button:hover {
-  background-color: #f2f2f2;
-}
-
-.nav-button:hover .tribar {
-  border-color: #3e3b49;
-  background-color: #3e3b49;
-}
-
-.tribar {
-  margin: 10px;
-  display: block;
-  width: 30px;
-  height: 1px;
-  background-color: #f2f2f2;
-  border: 1px solid #f2f2f2;
-  border-radius: 1px;
-}
-
-.nav-logo {
-  color: #f2f2f2;
-  text-decoration: none;
-  padding: 14px 26px;
-  font-size: 20px;
-  font-family: 'Courier New', Courier, monospace;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.nav-logo img {
-  width: 30px;
-  display: inline-block;
-  vertical-align: sub;
-}
-
 .nav-hr {
+  width: 90%;
   display: none;
   color: #f2f2f2;
-  width: 90%;
 }
 
-@media screen and (max-width: 890px) {
+@media screen and (max-width: 1000px) {
   .navbar-collapsed {
     flex: 1;
   }
@@ -180,9 +186,11 @@ export default {
   .navbar-menu.responsive {
     display: block;
     position: absolute;
-    top: 54px;
+    top: 0;
+    left: 0;
     right: 0;
-    z-index: 100;
+    width: 100%;
+    padding: 50px 0 25px;
     background-color: #00284c;
   }
 

@@ -19,4 +19,10 @@ export default {
   position: relative;
   z-index: 1;
 }
+
+@media screen and (max-width: 465px) {
+  #footer p {
+    font-size: 15px;
+  }
+}
 </style>

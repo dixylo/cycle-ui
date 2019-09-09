@@ -119,6 +119,8 @@ export default {
 
 <style scoped>
 .user {
+  box-sizing: border-box;
+  padding: 50px;
   background-image: url('../assets/login.jpg');
   background-position: center;
   background-repeat: no-repeat;
@@ -128,7 +130,6 @@ export default {
 }
 
 .user-panel {
-  width: 70%;
   max-width: 1024px;
   margin: auto;
   display: flex;
@@ -247,5 +248,56 @@ hr {
 .user-panel-button:hover {
   background-color: #376FB2;
   border-color: #376FB2;
+}
+
+@media screen and (max-width: 810px) {
+  .user-panel {
+    flex-direction: column-reverse;
+  }
+
+  .welcome-section {
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 30px 30px 0 0;
+  }
+
+  #wp2 {
+    width: 18em;
+  }
+
+  .form-section {
+    width: 100%;
+    border-radius: 0 0 30px 30px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .user {
+    padding: 0;
+  }
+
+  .user-panel {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .welcome-section {
+    border-radius: 0;
+  }
+
+  #wp2 {
+    margin: 1em auto;
+  }
+
+  .form-section {
+    border-radius: 0;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  #wp2 {
+    width: 12em;
+  }
 }
 </style>

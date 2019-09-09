@@ -6,9 +6,9 @@
       </div>
       <p class='page-title'>Contact Us</p>
     </div>
-    <div class='contact-box'>
+    <div class='item-box'>
       <p class='box-title'>Contact Information</p>
-      <div class='info-box'>
+      <div class='card-container'>
         <div class='text-box'>
           <p><span>Hours:</span> 8:00am—6:00pm, every day except Christmas</p>
           <p><span>Tel:</span> 09 666 5186</p>
@@ -36,13 +36,13 @@
 <style scoped>
 .hero {
   width: 100%;
-  padding-top: 44%;
+  padding-top: 43.87%;
   position: relative;
 }
 
 .image-box {
   position: fixed;
-  top: 3.65rem;
+  top: 3.71rem;
   left: 0;
   right: 0;
 }
@@ -51,31 +51,20 @@
   width: 100%;
 }
 
-.page-title {
-  color: #FFF;
-  font-size: 60px;
-  font-weight: bold;
-  text-align: left;
-  text-shadow: 2px 2px 4px #000000;
-  position: absolute;
-  left: 1em;
-  right: 1em;
-  bottom: .5em;
-  border-bottom: 3px solid #FFF;
-}
-
-.contact-box {
+.item-box {
+  width: 100%;
+  padding: 3rem 0;
   position: relative;
   background-color: #FFF;
 }
 
-.contact-box::before {
+.item-box::before {
   content: '';
 	width: 0;
 	height: 0;
   display: block;
   position: absolute;
-  top: -5px;
+  top: 0;
   left: 0;
   right: 0;
 	border-top: 30px solid #0076b2;
@@ -85,7 +74,7 @@
   z-index: 1;
 }
 
-.contact-box::after {
+.item-box::after {
   content: '';
 	width: 0;
 	height: 0;
@@ -100,36 +89,12 @@
 	border-right: 70vw solid #00992d;
 }
 
-.box-title {
-
-
-  color: #003C71;
-  font-size: 50px;
-  font-style: italic;
-  font-weight: bold;
-  margin: 0;
-  padding: 80px 0 0;
-  position: relative;
-}
-
 .box-title::after {
-  content: '__';
-  color: #00A9E0;
-  display: block;
-  font-size: 100px;
-  font-style: normal;
-  position: absolute;
-  bottom: -35%;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: -10%;
 }
 
-.info-box {
-  margin: 0 auto;
-  padding: 70px 100px 100px;
-  max-width: 1024px;
-  display: flex;
-  justify-content: space-between;
+.card-container {
+  padding: 50px 50px 70px;
   background-color: azure;
 }
 
@@ -156,5 +121,123 @@
 .map-box {
   width: 50%;
   height: 250px;
+}
+
+@media screen and (max-width: 1100px) {
+  .text-box {
+    width: 60%;
+  }
+
+  .map-box {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 930px) {
+  .page-title {
+    font-size: 50px;
+  }
+
+  .box-title {
+    font-size: 40px;
+  }
+
+  .box-title::after {
+    font-size: 80px;
+  }
+
+  .card-container {
+    flex-direction: column-reverse;
+  }
+
+  .text-box {
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  .map-box {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .page-title {
+    font-size: 40px;
+  }  
+}
+
+@media screen and (max-width: 600px) {
+  .box-title {
+    font-size: 30px;
+  }
+
+  .box-title::after {
+    font-size: 60px;
+  }
+
+  .card-container {
+    padding: 50px 30px;
+  }
+
+  .text-box span {
+    font-size: 12px;
+  }
+
+  .text-box p {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .page-title {
+    font-size: 30px;
+  }
+
+  .item-box::before {
+    border-top-width: 25px;
+    border-bottom-width: 40px;
+  }
+
+  .item-box::after {
+    border-top-width: 40px;
+    border-bottom-width: 25px;
+  } 
+}
+
+@media screen and (max-width: 440px) {
+  .page-title {
+    font-size: 25px;
+  }
+
+  .box-title {
+    font-size: 25px;
+  }
+
+  .box-title::after {
+    font-size: 50px;
+  }  
+
+  .item-box::before {
+    border-top-width: 20px;
+    border-bottom-width: 35px;
+  }
+
+  .item-box::after {
+    border-top-width: 35px;
+    border-bottom-width: 20px;
+  } 
+
+  .card-container {
+    padding: 40px 20px;
+  }
+
+  .text-box span {
+    font-size: 10px;
+    margin-right: .5em;
+  }
+
+  .text-box p {
+    font-size: 12px;
+  }
 }
 </style>

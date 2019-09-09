@@ -22,11 +22,13 @@
           </div>
         </div>
       </div>
-      <div class='model-box'>
+      <div class='item-box'>
         <p class='box-title'>Models</p>
-        <div class='card-container' v-if='type.models.length'>
-          <div v-for='model in type.models' :key='model._id'>
-            <Card :data='model' field='model' />
+        <div class='card-container-background' v-if='type.models.length'>
+          <div class='card-container'>
+            <div v-for='model in type.models' :key='model._id'>
+              <Card :data='model' field='model' />
+            </div>
           </div>
         </div>
         <div class='no-cards' v-else>
@@ -100,7 +102,7 @@ export default {
 .overview {
   max-width: 1024px;
   margin: 0 auto;
-  padding: 50px;
+  padding: 50px 0;
   overflow: hidden;
   display: flex;
   justify-content: space-around;
@@ -109,8 +111,7 @@ export default {
 }
 
 .image-container {
-  width: 600px;
-  flex: 1;
+  width: 500px;
 }
 
 .image-container img {
@@ -120,12 +121,11 @@ export default {
 }
 
 .metadata {
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  flex: 1;
-  padding: 2em;
 }
 
 .metadata span {
@@ -136,40 +136,17 @@ export default {
 .metadata p {
   font-size: 30px;
   margin: .5em;
-  text-align: justify;
+  text-align: left;
 }
 
-.model-box {
-  padding: 80px;
-}
-
-.box-title {
-  color: #003C71;
-  font-size: 50px;
-  font-style: italic;
-  font-weight: bold;
-  margin: 0;
+.item-box {
   position: relative;
+  padding: 3rem 0;
+  width: 100%;
+  background-color: #FFF;
 }
 
-.box-title::after {
-  content: '__';
-  color: #00A9E0;
-  display: block;
-  font-size: 100px;
-  font-style: normal;
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.model-box {
-  position: relative;
-}
-
-.model-box::before {
+.item-box::before {
   content: '';
 	width: 0;
 	height: 0;
@@ -184,12 +161,117 @@ export default {
 	border-right: 70vw solid #008000;
 }
 
-.card-container {
-  background-color: azure;
-  padding: 100px;
+.box-title::after {
+  bottom: -10%;
 }
 
 .no-cards {
   padding: 3em;
+}
+
+@media screen and (max-width: 1080px) {
+  .image-container {
+    width: 400px;
+  }
+
+  .metadata span {
+    font-size: 18px;
+  }
+
+  .metadata p {
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .image-container {
+    width: 350px;
+  }
+
+  .metadata span {
+    font-size: 15px;
+  }
+
+  .metadata p {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .image-container {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .overview {
+    padding: 0;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-container {
+    width: 350px;
+  }
+
+  .metadata {
+    width: 100%;
+  }
+
+  .item-box {
+    padding-top: 2rem;
+  }
+
+  .item-box::before {
+    border-top-width: 30px;
+    border-bottom-width: 30px;
+  }
+  
+  .box-title {
+    font-size: 40px;
+  }
+
+  .box-title::after {
+    font-size: 80px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .data {
+    padding: 30px;
+  }
+
+  .item-box::before {
+    border-top-width: 25px;
+    border-bottom-width: 25px;
+  }
+
+  .box-title {
+    font-size: 30px;
+  }
+
+  .box-title::after {
+    font-size: 60px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .image-container {
+    width: 300px;
+  }
+
+  .metadata span {
+    font-size: 12px;
+  }
+
+  .metadata p {
+    font-size: 15px;
+  }  
+}
+
+@media screen and (max-width: 410px) {
+  .image-container {
+    width: 250px;
+  }
 }
 </style>
