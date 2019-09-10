@@ -83,10 +83,7 @@
               type='submit'
               :status='rentalStatus'
             >
-              <div v-if='loadingRental'>
-                <img class='loading' alt='Loading...' src='@/assets/loading.png'/>
-              </div>
-              <div v-else>Place an Order</div>
+              Place an Order
             </Button>
           </form>
         </div>
@@ -149,110 +146,15 @@ export default {
 </script>
 
 <style scoped>
-.data {
-  color: #FFF;
-  padding: 50px;
-  position: relative;
-  text-shadow: 2px 2px 4px #000000;
-}
-
 .hero {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 0;
   background-image: url('../assets/hero_model.webp');
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.hero::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-	background-color: #000;
-  opacity: .6;
-}
-
-.overview {
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: 50px 0;
-  overflow: hidden;
-  display: flex;
-  justify-content: space-around;
-  position: relative;
-  z-index: 1;
-}
-
-.image-container {
-  width: 500px;
-}
-
-.image-container img {
-  width: 100%;
-  border: 5px solid #AAA;
-  border-style: outset;
-}
-
-.metadata {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.metadata span {
-  font-size: 20px;
-  margin-right: 1em;
-}
-
-.metadata p {
-  font-size: 30px;
-  margin: .5em;
-  text-align: left;
-}
-
-.introduction {
-  position: relative;
-  z-index: 1;
-}
-
-.introduction span {
-  font-size: 15px;
-  margin-right: 1em;
-}
-
-.introduction p {
-  margin: 0 auto;
-  max-width: 1024px;
-  text-align: justify;
 }
 
 .item-box {
-  position: relative;
   padding: 6rem 0 3rem;
-  width: 100%;
-  background-color: #FFF;
 }
 
 .item-box::before {
-  content: '';
-	width: 0;
-	height: 0;
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
 	border-top: 50px solid #007f26;
   border-bottom: 100px solid transparent;
 	border-left: 60vw solid #0076b2;
@@ -261,20 +163,8 @@ export default {
 }
 
 .item-box::after {
-  content: '';
-  width: 100vw;
-	height: 100px;
-  display: block;
-  position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
   background-color: #00A9E0;
-  z-index: 0;
-}
-
-.box-title::after {
-  bottom: -10%;
 }
 
 .card-container {
@@ -322,7 +212,7 @@ label {
 
 #datepicker {
   display: block;
-  margin: 1em;
+  margin: 1em auto;
   padding: 1em;
   color: white;
   font-size: 30px;
@@ -341,8 +231,8 @@ label {
 .submit {
   font-size: 20px;
   font-weight: bold;
-  cursor: pointer;
   color: #003C71;
+  margin: auto;
   padding: 1em 3em;
   border-radius: 2em;
   border-width: 3px;
@@ -359,10 +249,6 @@ label {
 .submitting {
   color: #FFF;
   background-color: #003C71;
-}
-
-.no-cards {
-  padding: 3em;
 }
 
 @media screen and (max-width: 1120px) {

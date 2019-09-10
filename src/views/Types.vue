@@ -1,7 +1,7 @@
 <template>
   <div class='container'>
-    <div class='hero'>
-      <div class='image-box'>
+    <div class='hero-section'>
+      <div class='hero-image-box'>
         <img alt='All Types' src='@/assets/hero_types.webp' />
       </div>
       <p class='page-title'>Wide Variety of Types</p>
@@ -46,43 +46,15 @@ export default {
 </script>
 
 <style scoped>
-.hero {
-  width: 100%;
-  padding-top: 44.8%;
-  position: relative;
-}
-
-.image-box {
-  position: fixed;
-  top: 3.71rem;
-  left: 0;
-  right: 0;
-}
-
-.image-box img {
-  width: 100%;
-}
-
 .page-title {
   text-align: right;
 }
 
 .item-box {
-  width: 100%;
   padding: 6rem 0 3rem;
-  position: relative;
-  background-color: #FFF;
 }
 
 .item-box::before {
-  content: '';
-	width: 0;
-	height: 0;
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
 	border-top: 50px solid #007f26;
   border-bottom: 100px solid transparent;
 	border-left: 30vw solid #00b235;
@@ -91,16 +63,8 @@ export default {
 }
 
 .item-box::after {
-  content: '';
-  width: 100vw;
-	height: 100px;
-  display: block;
-  position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
   background-color: #00A9E0;
-  z-index:0;
 }
 
 .box-title {
@@ -109,6 +73,10 @@ export default {
   font-size: 40px;
   font-style: normal;
   font-weight: 400;
+}
+
+.box-title::after {
+  bottom: 0;
 }
 
 @media screen and (max-width: 1080px) {

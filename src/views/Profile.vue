@@ -2,13 +2,13 @@
   <div class='container user'>
     <div class='user-panel user-panel-login'>
       <div class='welcome-section'>
-        <p id='wp1'>Thank you for being a Cycly member!</p>
-        <p id='wp2'>
+        <p class='p-one'>Thank you for being a Cycly member!</p>
+        <p class='p-two'>
           Now that you have logged in, why not rent a bike and have the simple pleasure of a bike ride?
         </p>
       </div>
       <div class='form-section'>
-        <p id='form-title'>My Profile</p>
+        <p class='form-title'>My Profile</p>
         <div v-if='!user'>
           <Skeleton :status='authStatus' :onReload='fetchMe' />
         </div>
@@ -59,90 +59,24 @@ export default {
 
 <style scoped>
 .user {
-  box-sizing: border-box;
-  padding: 50px;
   background-image: url('../assets/profile.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: flex;
-  align-items: center;
-}
-
-.user-panel {
-  max-width: 1024px;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  opacity: .9;
 }
 
 .welcome-section {
-  width: 40%;
-  padding: 40px;
-  color: #FFF;
   background-color: #004c00;
-  border-radius: 30px 0 0 30px;
-}
-
-#wp1 {
-  font-size: 30px;
-}
-
-#wp2 {
-  font-size: 20px;
 }
 
 .form-section {
-  width: 60%;
   color: #004c00;
-  background-color: #FFF;
-  border-radius: 0 30px 30px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
-#form-title {
-  font-size: 30px;
-  font-weight: 700;
-  text-align: center;
-  margin: 0 auto 1em;
-  position: relative;
-}
-
-#form-title::after {
-  content: '__';
-  color: #00A9E0;
-  display: block;
-  font-size: 50px;
-  font-style: normal;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.user-panel-div {
-  margin: 0 auto;
-  text-align: center;
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.form-title {
+  margin-top: 0;
 }
 
 .user-panel-input {
-  display: inline-block;
-  width: 100%;
-  height: 20px;
-  font-size: 20px;
-  margin: 10px;
-  border: none;
   color: #004c00;
-  border-bottom: 2px solid #004c00;
-  background-color: transparent;
-  outline: none;
+  border-bottom-color: #004c00;
 }
 
 @media screen and (max-width: 750px) {
@@ -157,7 +91,7 @@ export default {
     padding-bottom: 50px;
   }
 
-  #wp2 {
+  .p-two {
     width: 18em;
     margin: 1em auto;
   }
@@ -191,7 +125,7 @@ export default {
 }
 
 @media screen and (max-width: 440px) {
-  #wp2 {
+  .p-two {
     width: 12em;
   }
 }

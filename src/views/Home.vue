@@ -203,51 +203,25 @@ export default {
 }
 
 .link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  font-size: 25px;
-  font-weight: bold;
-  padding: 1em 3em;
-  background: transparent;
-  border: .16em solid #fff;
-  border-radius: 2em;
+  width: auto;
   margin: 0 3em;
-  text-decoration: none;
-  transition: all 0.2s;
+  padding: 1em 3em;
+  border-width: .16em;
+  font-size: 25px;
 }
 
 .link:hover {
   color: gray;
-  background: #fff;
 }
 
 .item-box {
-  position: relative;
   z-index: 1;
-  background-color: #fff;
-  padding: 6rem 0;
-}
-
-.item-box::before {
-  content: '';
-	width: 0;
-	height: 0;
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
+  padding: 4rem 0;
 }
 
 .item-box::after {
-  content: '';
 	width: 0;
 	height: 0;
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
 }
 
 #brand-box::before {
@@ -255,7 +229,6 @@ export default {
   border-bottom: 50px solid transparent;
 	border-left: 70vw solid #376FB2;
 	border-right: 30vw solid #00A9E0;
-  top: 0;
 }
 
 #brand-box::after {
@@ -271,7 +244,6 @@ export default {
   border-bottom: 50px solid transparent;
 	border-left: 30vw solid #33cc33;
 	border-right: 70vw solid #008000;
-  top: 0;
 }
 
 #type-box::after {
@@ -280,14 +252,6 @@ export default {
 	border-left: 70vw solid #008000;
 	border-right: 30vw solid #33cc33;
   bottom: 0;
-}
-
-.box-title {
-  padding-bottom: 1em;
-}
-
-.box-title::after {
-  bottom: -10%;
 }
 
 .card-container {

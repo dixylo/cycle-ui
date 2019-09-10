@@ -18,7 +18,7 @@
             :actions='tabs[selectedTabIndex].actions'
           />
           <Button
-            class='refresh'
+            class='user-panel-button'
             :status='status'
             :onClick='reload'
           >
@@ -212,22 +212,7 @@ export default {
 </script>
 
 <style scoped>
-.item-box {
-  position: relative;
-  padding: 3rem 0;
-  width: 100%;
-  background-color: #FFF;
-}
-
 .item-box::before {
-  content: '';
-	width: 0;
-	height: 0;
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
 	border-top: 50px solid #376FB2;
   border-bottom: 50px solid transparent;
 	border-left: 70vw solid #376FB2;
@@ -250,27 +235,14 @@ export default {
 
 .box-title::after {
   content: attr(data-pseudo-content);
-  bottom: -10%;
 }
 
 .table {
   margin: 0 auto;
 }
 
-.refresh {
-  margin: 20px auto;
-  padding: .5em 3em;
-  border-radius: 10px;
-  font-size: 20px;
-  cursor: pointer;
-  color: #FFF;
-  background-color: #006ccc;
-  border-color: #006ccc;
-}
-
-.refresh:hover {
-  background-color: #003C71;
-  border-color: #003C71;
+.user-panel-button {
+  width: 200px;
 }
 
 @media screen and (max-width: 1024px) {

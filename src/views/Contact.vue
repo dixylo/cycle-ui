@@ -1,8 +1,8 @@
 <template>
   <div class='container'>
-    <div class='hero'>
-      <div class='image-box'>
-        <img alt='Contact Us' src='@/assets/hero_contact.jpg' />
+    <div class='hero-section'>
+      <div class='hero-image-box'>
+        <img alt='Contact Us' src='@/assets/hero_contact.webp' />
       </div>
       <p class='page-title'>Contact Us</p>
     </div>
@@ -34,39 +34,7 @@
 </template>
 
 <style scoped>
-.hero {
-  width: 100%;
-  padding-top: 43.87%;
-  position: relative;
-}
-
-.image-box {
-  position: fixed;
-  top: 3.71rem;
-  left: 0;
-  right: 0;
-}
-
-.image-box img {
-  width: 100%;
-}
-
-.item-box {
-  width: 100%;
-  padding: 3rem 0;
-  position: relative;
-  background-color: #FFF;
-}
-
 .item-box::before {
-  content: '';
-	width: 0;
-	height: 0;
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
 	border-top: 30px solid #0076b2;
   border-bottom: 50px solid transparent;
 	border-left: 70vw solid #0087cc;
@@ -75,22 +43,14 @@
 }
 
 .item-box::after {
-  content: '';
 	width: 0;
 	height: 0;
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
   bottom: 0;
+  z-index: 1;
 	border-top: 50px solid transparent;
   border-bottom: 30px solid #007f26;
 	border-left: 30vw solid #00b235;
 	border-right: 70vw solid #00992d;
-}
-
-.box-title::after {
-  bottom: -10%;
 }
 
 .card-container {

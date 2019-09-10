@@ -1,12 +1,12 @@
 <template>
-  <div id='wrapper'>
-    <div id='items' v-if="status === 'loading'">
-      <div id='card' v-for='n in 12' :key='n'>
-        <div id='image'>
+  <div class='card-container-background'>
+    <div class='card-container' v-if="status === 'loading'">
+      <div class='card' v-for='n in 12' :key='n'>
+        <div class='image'>
           <img class='loading' alt='Loading...' src='@/assets/loading.png' />
         </div>
-        <p id='caption-one'></p>
-        <p id='caption-two'></p>
+        <p class='caption-one'></p>
+        <p class='caption-two'></p>
       </div>
     </div>
     <div class='error' v-else-if="status === 'error'">
@@ -33,40 +33,27 @@ export default {
 </script>
 
 <style scoped>
-#wrapper {
-  background-color: azure;
-}
-
-#items {
-  margin: 0 auto;
-  padding: 100px;
-  max-width: 1024px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
-#card {
+.card {
   width: 300px;
   margin: 10px 20px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
-#image {
+.image {
   position: relative;
   height: 300px;
   background-color: #e3e3e3;
 }
 
-#caption-one {
+.caption-one {
   width: 80%;
   height: 20px;
   margin-left: 20px;
   background-color: #e3e3e3;
 }
 
-#caption-two {
+.caption-two {
   width: 60%;
   height: 20px;
   margin-left: 20px;
@@ -88,49 +75,26 @@ export default {
   font-size: 30px;
 }
 
+.user-panel-button {
+  width: 200px;
+}
+
 .link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  font-size: 20px;
-  /* font-weight: bold; */
   width: 60%;
   height: 40px;
-  /* padding: 0 .75em; */
-  background-color: #003c71;
-  border: 2px solid #003c71;
-  border-radius: 5px;
   margin: 20px auto;
-  text-decoration: none;
-  transition: all 0.2s;
+  padding: 0;
+  border-color: #003c71;
+  border-radius: 5px;
+  background-color: #003c71;
+  font-size: 20px;
+  font-weight: normal;
 }
 
 .link:hover {
-  background-color: #376FB2;
+  color: #fff;
   border-color: #376FB2;
-}
-
-.user-panel-button {
-  width: 60%;
-  height: 40px;
-  margin: 20px auto;
-  border-radius: 5px;
-  font-size: 20px;
-  color: #FFF;
-  background-color: #003c71;
-  border-color: #003c71;
-
-  cursor: pointer;
-}
-
-.user-panel-button:hover {
   background-color: #376FB2;
-  border-color: #376FB2;
-}
-
-.user-panel-button:focus {
-  outline: none;
 }
 
 .loading {

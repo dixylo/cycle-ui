@@ -1,7 +1,7 @@
 <template>
   <div class='container'>
-    <div class='hero'>
-      <div class='image-box'>
+    <div class='hero-section'>
+      <div class='hero-image-box'>
         <img alt='About Cycly' src='@/assets/hero_about.webp' />
       </div>
       <p class='page-title'>About Cycly</p>
@@ -50,23 +50,6 @@
 </template>
 
 <style scoped>
-.hero {
-  width: 100%;
-  padding-top: 45%;
-  position: relative;
-}
-
-.image-box {
-  position: fixed;
-  top: 3.65rem;
-  left: 0;
-  right: 0;
-}
-
-.image-box img {
-  width: 100%;
-}
-
 /* *********************** */
 /* Timeline Section Starts */
 /* *********************** */
