@@ -79,6 +79,7 @@
             >
             <Button
               class='submit'
+              :class="{submitting: rentalStatus === 'loading'}"
               type='submit'
               :status='rentalStatus'
             >
@@ -303,7 +304,6 @@ th, td {
 
 th {
   padding: .6em .4em;
-  /* padding-bottom: 12px; */
   background-color: #4CAF50;
   color: white;
 }
@@ -338,7 +338,7 @@ label {
   color: #0076b2;
 }
 
-button {
+.submit {
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
@@ -351,7 +351,12 @@ button {
   transition: .3s;
 }
 
-button:hover {
+.submit:hover {
+  color: #FFF;
+  background-color: #003C71;
+}
+
+.submitting {
   color: #FFF;
   background-color: #003C71;
 }

@@ -76,7 +76,9 @@
 
 .timeline-box {
   /* background-color: #474e5d; */
-  font-family: Helvetica, sans-serif;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  color: #00284c;
 }
 
 /* The actual timeline (the vertical ruler) */
@@ -91,7 +93,7 @@
   content: '';
   position: absolute;
   width: 6px;
-  background-color: white;
+  background-color: green;
   top: 0;
   bottom: 0;
   left: 50%;
@@ -166,14 +168,41 @@
 /* The actual content */
 .content {
   padding: 20px 30px;
-  background-color: white;
+  background-color: #f2f2f2;
   position: relative;
   border-radius: 6px;
+  opacity: .97;
   box-shadow: 10px 10px 10px #000; 
+}
+
+@media screen and (max-width: 1024px) {
+  .page-title {
+    font-size: 50px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .page-title {
+    font-size: 40px;
+  }
+
+  .timeline-box {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .timeline-box {
+    font-size: 16px;
+  }
 }
 
 /* Media queries - Responsive timeline on screens less than 600px wide */
 @media screen and (max-width: 600px) {
+  .page-title {
+    font-size: 35px;
+  }
+
   /* Place the timelime to the left */
   .timeline::after {
     left: 31px;
@@ -202,6 +231,18 @@
   /* Make all right containers behave like the left ones */
   .right {
     left: 0%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .page-title {
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .timeline-box {
+    font-size: 14px;
   }
 }
 </style>

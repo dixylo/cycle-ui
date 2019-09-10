@@ -1,31 +1,33 @@
 <template>
-  <div class='container admin'>
-    <div class='tab'>
-      <button v-for='(tab, index) in tabs' :key='index'
-        class='tablink'
-        :class="{'tablink-active': index === selectedTabIndex}"
-        @click='switchTab(index)'
-      >
-        {{ tab.text }}
-      </button>
-    </div>
-    <div class='tabcontent'>
-      <div v-if='list.length'>
-        <Table class='table'
-          :header='tabs[selectedTabIndex].header'
-          :data='list'
-          :actions='tabs[selectedTabIndex].actions'
-        />
-        <Button
-          class='refresh'
-          :status='status'
-          :onClick='reload'
+  <div class='container'>
+    <div class='item-box'>
+      <div class='card-container'>
+        <p v-for='(tab, index) in tabs' :key='index'
+          class='box-title'
+          :data-pseudo-content="index === selectedTabIndex ? '__' : ''"
+          @click.prevent='switchTab(index)'
         >
-          Refresh
-        </Button>
+          {{ tab.text }}
+        </p>
       </div>
-      <div v-else>
-        <Skeleton :status='status' :onReload='reload' />
+      <div class='card-container-background'>
+        <div v-if='list.length'>
+          <Table class='table'
+            :header='tabs[selectedTabIndex].header'
+            :data='list'
+            :actions='tabs[selectedTabIndex].actions'
+          />
+          <Button
+            class='refresh'
+            :status='status'
+            :onClick='reload'
+          >
+            Refresh
+          </Button>
+        </div>
+        <div v-else>
+          <Skeleton :status='status' :onReload='reload' />
+        </div>
       </div>
     </div>
   </div>
@@ -210,11 +212,14 @@ export default {
 </script>
 
 <style scoped>
-.admin {
+.item-box {
   position: relative;
+  padding: 3rem 0;
+  width: 100%;
+  background-color: #FFF;
 }
 
-.admin::before {
+.item-box::before {
   content: '';
 	width: 0;
 	height: 0;
@@ -229,49 +234,23 @@ export default {
 	border-right: 30vw solid #00A9E0;
 }
 
-.tab {
-  display: flex;
+.card-container {
   justify-content: center;
-  margin: 0 auto;
-  padding-top: 100px;
-  max-width: 1024px;
 }
 
-.tablink {
-  border: none;
-  outline: none;
+.box-title {
+  margin: 0 .5em;
   cursor: pointer;
   transition: 0.3s;
-  position: relative;
-  color: #003C71;
-  font-size: 50px;
-  font-weight: bold;
-  margin: 0 .5em;
 }
 
-.tablink:hover {
+.box-title:hover {
   color: skyblue;
 }
 
-.tablink-active {
-  position: relative;
-}
-
-.tablink-active::after {
-  content: '___';
-  color: #00A9E0;
-  display: block;
-  font-size: 80px;
-  font-style: normal;
-  position: absolute;
-  left: 50%;
-  bottom: -35%;
-  transform: translateX(-50%);
-}
-
-.tabcontent {
-  padding: 80px 0;
-  background-color: azure;
+.box-title::after {
+  content: attr(data-pseudo-content);
+  bottom: -10%;
 }
 
 .table {
@@ -280,7 +259,7 @@ export default {
 
 .refresh {
   margin: 20px auto;
-  padding: 1em 3em;
+  padding: .5em 3em;
   border-radius: 10px;
   font-size: 20px;
   cursor: pointer;
@@ -294,7 +273,76 @@ export default {
   border-color: #003C71;
 }
 
-.refresh:focus {
-  outline: none;
+@media screen and (max-width: 1024px) {
+  .item-box::before {
+    border-top-width: 40px;
+    border-bottom-width: 40px;
+  }
+
+  .box-title {
+    font-size: 40px;
+  }
+
+  .box-title::after {
+    font-size: 80px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  table {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 870px) {
+  table {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 790px) {
+  .item-box::before {
+    border-top-width: 30px;
+    border-bottom-width: 30px;
+  }
+
+  .box-title {
+    font-size: 30px;
+  }
+
+  .box-title::after {
+    font-size: 60px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 715px) {
+  table {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .card-container-background {
+    overflow: scroll;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .item-box::before {
+    border-top-width: 25px;
+    border-bottom-width: 25px;
+  }
+
+  .box-title {
+    font-size: 25px;
+  }
+
+  .box-title::after {
+    font-size: 50px;
+  }
 }
 </style>

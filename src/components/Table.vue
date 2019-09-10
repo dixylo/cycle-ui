@@ -35,6 +35,9 @@ export default {
     computeCell (row, key) {
       if (key.includes('.')) {
         const keys = key.split('.')
+        if (keys[1] === 'color') {
+          return row[keys[0]][keys[1]].replace(/\//g, ', ')
+        }
         return row[keys[0]][keys[1]]
       }
       if (key.includes('time')) {

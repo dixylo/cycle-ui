@@ -1,50 +1,52 @@
 <template>
   <div class='container'>
-    <div class='rental-box'>
+    <div class='item-box'>
       <p class='box-title'>My Rentals</p>
       <div v-if='!rentals.length'>
         <Skeleton :status='rentalStatus' :onReload='reload' />
       </div>
-      <div class='table-box' v-else>
-        <table>
-          <thead>
-            <tr>
-              <th>Model</th>
-              <th>Size</th>
-              <th>Color</th>
-              <th>Ordered</th>
-              <th>To Collect</th>
-              <th>Rented Out</th>
-              <th>Returned</th>
-              <th>$/hr</th>
-              <th>Fee</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody v-for='rental in rentals' :key='rental._id'>
-            <tr>
-              <td>{{ rental.cycle.model }}</td>
-              <td>{{ rental.cycle.size }}</td>
-              <td>{{ rental.cycle.color }}</td>
-              <td>{{ formatTime(rental.timeOrdered) }}</td>
-              <td>{{ formatTime(rental.timeToCollect) }}</td>
-              <td>{{ formatTime(rental.timeRentedOut) }}</td>
-              <td>{{ formatTime(rental.timeReturned) }}</td>
-              <td>{{ rental.cycle.hourlyRentalRate }}</td>
-              <td>{{ rental.rentalFee }}</td>
-              <td>
-                <div v-if='!rental.timeRentedOut'>
-                  <span @click.prevent='removeRental(rental._id)'>
-                    Delete
-                  </span>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <Button class='refresh' :status='rentalStatus' @click='reload'>
-          Refresh
-        </Button>
+      <div class='card-container-background' v-else>
+        <div class='card-container'>
+          <table>
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Size</th>
+                <th>Color</th>
+                <th>Ordered</th>
+                <th>To Collect</th>
+                <th>Rented Out</th>
+                <th>Returned</th>
+                <th>$/hr</th>
+                <th>Fee</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody v-for='rental in rentals' :key='rental._id'>
+              <tr>
+                <td>{{ rental.cycle.model }}</td>
+                <td>{{ rental.cycle.size }}</td>
+                <td>{{ formatColor(rental.cycle.color) }}</td>
+                <td>{{ formatTime(rental.timeOrdered) }}</td>
+                <td>{{ formatTime(rental.timeToCollect) }}</td>
+                <td>{{ formatTime(rental.timeRentedOut) }}</td>
+                <td>{{ formatTime(rental.timeReturned) }}</td>
+                <td>{{ rental.cycle.hourlyRentalRate }}</td>
+                <td>{{ rental.rentalFee }}</td>
+                <td>
+                  <div v-if='!rental.timeRentedOut'>
+                    <span @click.prevent='removeRental(rental._id)'>
+                      Delete
+                    </span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <Button class='refresh' :status='rentalStatus' :onClick='reload'>
+            Refresh
+          </Button>
+        </div>
       </div>
     </div>
   </div>
@@ -59,7 +61,7 @@ export default {
   name: 'rentals',
   components: { Skeleton, Button },
   created () {
-    if (!this.rentals.length) this.fetchMyRentals()
+    this.fetchMyRentals()
   },
   computed: {
     ...mapGetters(['getRentals', 'rentalStatus']),
@@ -72,7 +74,10 @@ export default {
     reload () {
       this.fetchMyRentals()
     },
-    formatTime: function (time) {
+    formatColor (color) {
+      return color.replace(/\//g, ', ')
+    },
+    formatTime (time) {
       if (!time) return
       return time.slice(0, 16).replace('T', ', ')
     },
@@ -92,11 +97,14 @@ export default {
 </script>
 
 <style scoped>
-.rental-box {
+.item-box {
   position: relative;
+  padding: 3rem 0;
+  width: 100%;
+  background-color: #FFF;
 }
 
-.rental-box::before {
+.item-box::before {
   content: '';
 	width: 0;
 	height: 0;
@@ -111,38 +119,12 @@ export default {
 	border-right: 30vw solid #00A9E0;
 }
 
-.box-title {
-  position: relative;
-  color: #003C71;
-  font-size: 50px;
-  font-style: italic;
-  font-weight: bold;
-  margin: 0 auto;
-  padding: 100px 0 0;
-}
-
 .box-title::after {
-  content: '__';
-  color: #00A9E0;
-  display: block;
-  font-size: 100px;
-  font-style: normal;
-  position: absolute;
-  left: 50%;
-  bottom: -35%;
-  transform: translateX(-50%);
+  bottom: -10%;
 }
 
-.table-box {
-  margin: 0 auto;
-  padding: 80px 0;
-  width: 100%;
-  display: flex;
+.card-container {
   flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  background-color: azure;
 }
 
 table {
@@ -190,7 +172,7 @@ span:hover {
 
 .refresh {
   margin: 20px auto;
-  padding: 1em 3em;
+  padding: .5em 3em;
   border-radius: 10px;
   font-size: 20px;
   cursor: pointer;
@@ -204,7 +186,61 @@ span:hover {
   border-color: #003C71;
 }
 
-.refresh:focus {
-  outline: none;
+@media screen and (max-width: 1024px) {
+  .item-box::before {
+    border-top-width: 40px;
+    border-bottom-width: 40px;
+  }
+
+  .box-title {
+    font-size: 40px;
+  }
+
+  .box-title::after {
+    font-size: 80px;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  table {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  table {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 690px) {
+  .item-box::before {
+    border-top-width: 30px;
+    border-bottom-width: 30px;
+  }
+
+  .box-title {
+    font-size: 30px;
+  }
+
+  .box-title::after {
+    font-size: 60px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  table {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .card-container {
+    overflow: scroll;
+  }
 }
 </style>

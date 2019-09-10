@@ -13,36 +13,27 @@
           <Skeleton :status='authStatus' :onReload='fetchMe' />
         </div>
         <div class='user-panel-div' v-else>
-          <div class='user-panel-row'>
-            <label htmlFor='username'>USERNAME</label>
-            <input
-              type='username'
-              name='username'
-              class='user-panel-input'
-              :value='user.username'
-              disabled
-            />
-          </div>
-          <div class='user-panel-row'>
-            <label htmlFor='email'>EMAIL</label>
-            <input
-              type='email'
-              name='email'
-              class='user-panel-input'
-              :value='user.email'
-              disabled
-            />
-          </div>
-          <div class='user-panel-row'>
-            <label htmlFor='phone'>PHONE</label>
-            <input
-              type='tel'
-              name='phone'
-              class='user-panel-input'
-              :value='user.phone'
-              disabled
-            />
-          </div>
+          <input
+            type='username'
+            name='username'
+            class='user-panel-input'
+            :value="'Username:  ' + user.username"
+            disabled
+          />
+          <input
+            type='email'
+            name='email'
+            class='user-panel-input'
+            :value="'Email:  ' + user.email"
+            disabled
+          />
+          <input
+            type='tel'
+            name='phone'
+            class='user-panel-input'
+            :value="'Phone:  ' + user.phone"
+            disabled
+          />
         </div>
       </div>
     </div>
@@ -68,6 +59,8 @@ export default {
 
 <style scoped>
 .user {
+  box-sizing: border-box;
+  padding: 50px;
   background-image: url('../assets/profile.jpg');
   background-position: center;
   background-repeat: no-repeat;
@@ -77,7 +70,6 @@ export default {
 }
 
 .user-panel {
-  width: 70%;
   max-width: 1024px;
   margin: auto;
   display: flex;
@@ -140,23 +132,6 @@ export default {
   justify-content: center;
 }
 
-.user-panel-row {
-  text-align: left;
-  display: flex;
-  justify-content: flex-start;
-  margin: .25em;
-}
-
-label {
-  display: flex;
-  align-items: center;
-}
-
-.form-section input {
-  color: #004c00;
-  border-bottom: 2px solid #004c00;
-}
-
 .user-panel-input {
   display: inline-block;
   width: 100%;
@@ -164,7 +139,60 @@ label {
   font-size: 20px;
   margin: 10px;
   border: none;
+  color: #004c00;
+  border-bottom: 2px solid #004c00;
   background-color: transparent;
   outline: none;
+}
+
+@media screen and (max-width: 750px) {
+  .user-panel {
+    flex-direction: column;
+  }
+
+  .welcome-section {
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 30px 30px 0 0;
+    padding-bottom: 50px;
+  }
+
+  #wp2 {
+    width: 18em;
+    margin: 1em auto;
+  }
+
+  .form-section {
+    width: 100%;
+    border-radius: 0 0 30px 30px;
+    padding: 80px 0;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .user {
+    padding: 0;
+  }
+
+  .user-panel {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .welcome-section {
+    border-radius: 0;
+    padding: 50px 30px 60px;
+  }
+
+  .form-section {
+    border-radius: 0;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  #wp2 {
+    width: 12em;
+  }
 }
 </style>
