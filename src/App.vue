@@ -47,6 +47,7 @@ body {
 .container {
   width: 100%;
   overflow: hidden;
+  max-width: 1440px;
   min-height: 100vh;
   margin-top: 3.7rem;
 }
