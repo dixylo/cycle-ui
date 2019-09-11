@@ -73,7 +73,7 @@ export default {
       this.$store.dispatch('login', { email, password })
         .then(() => {
           alert('Login Successful. Redirecting to Homepage.')
-          this.$router.push('/')
+          this.$router.go(-1)
         })
         .catch(err => console.log(err))
     },
