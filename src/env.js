@@ -1,6 +1,6 @@
 const config = {
   dev: {
-    apiServer: 'https://lim-cors-anywhere.herokuapp.com/https://cycly.herokuapp.com'
+    apiServer: 'https://cycly.herokuapp.com'
   }
 }
 
