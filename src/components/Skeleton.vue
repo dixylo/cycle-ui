@@ -1,14 +1,14 @@
 <template>
   <div class='card-container-background'>
-    <div class='card-container' v-if="status === 'loading'">
-      <div class='card' v-for='n in 12' :key='n'>
+    <ul class='card-container' v-if="status === 'loading'">
+      <li class='card' v-for='n in 12' :key='n'>
         <div class='image'>
           <img class='loading' alt='Loading...' src='@/assets/loading.png' />
         </div>
         <p class='caption-one'></p>
         <p class='caption-two'></p>
-      </div>
-    </div>
+      </li>
+    </ul>
     <div class='error' v-else-if="status === 'error'">
       <span>Something failed. Please try again.</span>
       <button class='user-panel-button' @click='handleReload'>Reload Page</button>

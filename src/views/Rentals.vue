@@ -104,11 +104,12 @@ export default {
 .item-box::before {
 	border-top: 50px solid #376FB2;
   border-bottom: 50px solid transparent;
-	border-left: 70vw solid #376FB2;
-	border-right: 30vw solid #00A9E0;
+	border-left: 1008px solid #376FB2;
+	border-right: 432px solid #00A9E0;
 }
 
 .card-container {
+  display: flex;
   flex-direction: column;
 }
 
@@ -157,6 +158,13 @@ span:hover {
 
 .user-panel-button {
   width: 200px;
+}
+
+@media screen and (max-width: 1440px) {
+  .item-box::before {
+    border-left-width: 70vw;
+    border-right-width: 30vw;
+  }
 }
 
 @media screen and (max-width: 1024px) {

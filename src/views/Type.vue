@@ -25,11 +25,11 @@
       <div class='item-box'>
         <p class='box-title'>Models</p>
         <div class='card-container-background' v-if='type.models.length'>
-          <div class='card-container'>
-            <div v-for='model in type.models' :key='model._id'>
+          <ul class='card-container'>
+            <li v-for='model in type.models' :key='model._id'>
               <Card :data='model' field='model' />
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
         <div class='no-cards' v-else>
           <h2>Oops! We haven't got any models of this type yet.</h2>
@@ -77,8 +77,15 @@ export default {
 .item-box::before {
 	border-top: 50px solid #008000;
   border-bottom: 50px solid transparent;
-	border-left: 30vw solid #00A9E0;
-	border-right: 70vw solid #008000;
+	border-left: 432px solid #00A9E0;
+	border-right: 1008px solid #008000;
+}
+
+@media screen and (max-width: 1440px) {
+  .item-box::before {
+    border-left-width: 30vw;
+    border-right-width: 70vw;
+  }
 }
 
 @media screen and (max-width: 1080px) {

@@ -30,11 +30,11 @@
       <div class='item-box'>
         <p class='box-title'>Models</p>
         <div class='card-container-background' v-if='brand.models.length'>
-          <div class='card-container'>
-            <div v-for='model in brand.models' :key='model._id'>
+          <ul class='card-container'>
+            <li v-for='model in brand.models' :key='model._id'>
               <Card :data='model' field='model' />
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
         <div class='no-cards' v-else>
           <h2>Oops! We haven't got any models of this brand yet.</h2>
@@ -82,8 +82,15 @@ export default {
 .item-box::before {
 	border-top: 50px solid #376FB2;
   border-bottom: 50px solid transparent;
-	border-left: 70vw solid #376FB2;
-	border-right: 30vw solid #00b200;
+	border-left: 1008px solid #376FB2;
+	border-right: 432px solid #00b200;
+}
+
+@media screen and (max-width: 1440px) {
+  .item-box::before {
+    border-left-width: 70vw;
+    border-right-width: 30vw;
+  }
 }
 
 @media screen and (max-width: 940px) {

@@ -45,10 +45,12 @@ body {
 }
 
 .container {
+  position: relative;
   width: 100%;
   overflow: hidden;
   max-width: 1440px;
   min-height: 100vh;
+  margin: 0 auto;
   margin-top: 3.7rem;
 }
 
@@ -68,7 +70,6 @@ body {
 .item-box {
   position: relative;
   padding: 3rem 0;
-  /* width: 100%; */
   background-color: #FFF;
 }
 
@@ -86,6 +87,7 @@ body {
 .item-box::after {
   content: '';
   width: 100vw;
+  max-width: 1440px;
 	height: 100px;
   display: block;
   position: absolute;
@@ -119,14 +121,19 @@ body {
 .card-container {
   position: relative;
   margin: 0 auto;
+  padding: 40px 0;
   max-width: 1024px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  list-style: none;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  grid-gap: 1rem;
+  padding-inline-start: 0;
+  justify-content: center;
+  align-content: flex-start;
 }
 
 .card-container-background {
-  padding: 40px 0;
   background-color: azure;
 }
 
@@ -174,6 +181,8 @@ body {
   top: 3.71rem;
   left: 0;
   right: 0;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 .hero-image-box img {

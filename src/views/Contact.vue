@@ -35,10 +35,10 @@
 
 <style scoped>
 .item-box::before {
-	border-top: 30px solid #0076b2;
-  border-bottom: 50px solid transparent;
-	border-left: 70vw solid #0087cc;
-	border-right: 30vw solid #0098e5;
+	border-top: 40px solid #0076b2;
+  border-bottom: 60px solid transparent;
+	border-left: 1008px solid #0087cc;
+	border-right: 432px solid #0098e5;
   z-index: 1;
 }
 
@@ -47,15 +47,16 @@
 	height: 0;
   bottom: 0;
   z-index: 1;
-	border-top: 50px solid transparent;
-  border-bottom: 30px solid #007f26;
-	border-left: 30vw solid #00b235;
-	border-right: 70vw solid #00992d;
+	border-top: 60px solid transparent;
+  border-bottom: 40px solid #007f26;
+	border-left: 432px solid #00b235;
+	border-right: 1008px solid #00992d;
 }
 
 .card-container {
   padding: 50px 50px 70px;
   background-color: azure;
+  display: flex;
 }
 
 .text-box {
@@ -81,6 +82,18 @@
 .map-box {
   width: 50%;
   height: 250px;
+}
+
+@media screen and (max-width: 1440px) {
+  .item-box::before {
+    border-left-width: 70vw;
+    border-right-width: 30vw;
+  }
+
+  .item-box::after {
+    border-left-width: 30vw;
+    border-right-width: 70vw;
+  }
 }
 
 @media screen and (max-width: 1100px) {
@@ -161,7 +174,7 @@
   .item-box::after {
     border-top-width: 40px;
     border-bottom-width: 25px;
-  } 
+  }
 }
 
 @media screen and (max-width: 440px) {

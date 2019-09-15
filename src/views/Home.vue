@@ -10,11 +10,11 @@
         <div v-if='!brands.length'>
           <Skeleton :status='brandStatus' :onReload='fetchAllBrands' />
         </div>
-        <div class='card-container' v-else>
-          <div v-for='brand in brands' :key='brand._id'>
+        <ul class='card-container' v-else>
+          <li v-for='brand in brands' :key='brand._id'>
             <Card :data='brand' field='brand' />
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </div>
     <div class='image-section'>
@@ -37,11 +37,11 @@
         <div v-if='!types.length'>
           <Skeleton :status='typeStatus' :onReload='fetchAllTypes' />
         </div>
-        <div class='card-container' v-else>
-          <div v-for='type in types' :key='type._id'>
+        <ul class='card-container' v-else>
+          <li v-for='type in types' :key='type._id'>
             <Card :data='type' field='type' />
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </div>
     <div class='image-section'>
@@ -112,6 +112,7 @@ export default {
   top: 3.71rem;
   left: 0;
   right: 0;
+  max-width: 1440px;
 }
 
 #placeholder {
@@ -227,35 +228,57 @@ export default {
 #brand-box::before {
 	border-top: 50px solid #376FB2;
   border-bottom: 50px solid transparent;
-	border-left: 70vw solid #376FB2;
-	border-right: 30vw solid #00A9E0;
+	border-left: 1008px solid #376FB2;
+	border-right: 432px solid #00A9E0;
 }
 
 #brand-box::after {
 	border-top: 50px solid transparent;
   border-bottom: 50px solid #376FB2;
-	border-left: 30vw solid #376FB2;
-	border-right: 70vw solid #00A9E0;
+	border-left: 432px solid #376FB2;
+	border-right: 1008px solid #00A9E0;
   bottom: 0;
 }
 
 #type-box::before {
 	border-top: 50px solid #008000;
   border-bottom: 50px solid transparent;
-	border-left: 30vw solid #33cc33;
-	border-right: 70vw solid #008000;
+	border-left: 432px solid #33cc33;
+	border-right: 1008px solid #008000;
 }
 
 #type-box::after {
 	border-top: 50px solid transparent;
   border-bottom: 50px solid #008000;
-	border-left: 70vw solid #008000;
-	border-right: 30vw solid #33cc33;
+	border-left: 1008px solid #008000;
+	border-right: 432px solid #33cc33;
   bottom: 0;
 }
 
 .card-container {
   max-width: 100vw;
+}
+
+@media screen and (max-width: 1440px) {
+  #brand-box::before {
+    border-left-width: 70vw;
+    border-right-width: 30vw;
+  }
+
+  #brand-box::after {
+    border-left-width: 30vw;
+    border-right-width: 70vw;
+  }
+
+  #type-box::before {
+    border-left-width: 30vw;
+    border-right-width: 70vw;
+  }
+
+  #type-box::after {
+    border-left-width: 70vw;
+    border-right-width: 30vw;
+  }
 }
 
 @media screen and (max-width: 900px) {

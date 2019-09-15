@@ -14,11 +14,11 @@
         <Skeleton :status='typeStatus' :onReload='fetchAllTypes' />
       </div>
       <div class='card-container-background' v-else>
-        <div class='card-container'>
-          <div v-for='type in types' :key='type._id'>
+        <ul class='card-container'>
+          <li v-for='type in types' :key='type._id'>
             <Card :data='type' field='type' />
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -57,8 +57,8 @@ export default {
 .item-box::before {
 	border-top: 50px solid #007f26;
   border-bottom: 100px solid transparent;
-	border-left: 30vw solid #00b235;
-	border-right: 70vw solid #00992d;
+	border-left: 432px solid #00b235;
+	border-right: 1008px solid #00992d;
   z-index: 1;
 }
 
@@ -77,6 +77,13 @@ export default {
 
 .box-title::after {
   bottom: 0;
+}
+
+@media screen and (max-width: 1440px) {
+  .item-box::before {
+    border-left-width: 30vw;
+    border-right-width: 70vw;
+  }
 }
 
 @media screen and (max-width: 1080px) {

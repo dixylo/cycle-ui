@@ -1,7 +1,6 @@
 import axios from 'axios'
-import config from '@/env'
+import server from '@/config'
 
-const server = config.dev.apiServer
 axios.defaults.baseURL = `${server}/api`
 
 const state = {

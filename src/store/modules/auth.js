@@ -1,7 +1,5 @@
 import axios from 'axios'
-import config from '@/env'
-
-const server = config.dev.apiServer
+import server from '@/config'
 
 const state = {
   user: null,

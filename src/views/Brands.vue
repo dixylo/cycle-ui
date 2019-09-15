@@ -14,11 +14,11 @@
         <Skeleton :status='brandStatus' :onReload='fetchAllBrands' />
       </div>
       <div class='card-container-background' v-else>
-        <div class='card-container'>
-          <div v-for='brand in brands' :key='brand._id'>
+        <ul class='card-container'>
+          <li v-for='brand in brands' :key='brand._id'>
             <Card :data='brand' field='brand' />
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -53,8 +53,8 @@ export default {
 .item-box::before {
 	border-top: 50px solid #0076b2;
   border-bottom: 100px solid transparent;
-	border-left: 70vw solid #0087cc;
-	border-right: 30vw solid #0098e5;
+	border-left: 1008px solid #0087cc;
+	border-right: 432px solid #0098e5;
   z-index: 1;
 }
 
@@ -73,6 +73,13 @@ export default {
 
 .box-title::after {
   bottom: 0;
+}
+
+@media screen and (max-width: 1440px) {
+  .item-box::before {
+    border-left-width: 70vw;
+    border-right-width: 30vw;
+  }
 }
 
 @media screen and (max-width: 1024px) {

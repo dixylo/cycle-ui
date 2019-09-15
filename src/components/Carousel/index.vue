@@ -63,7 +63,7 @@ export default {
 
 /* Slideshow container */
 #carousel {
-  max-width: 1920px;
+  max-width: 1440px;
   position: relative;
   margin: auto;
 }

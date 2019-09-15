@@ -38,7 +38,7 @@ export default {
 <style scoped>
 .card {
   width: 300px;
-  margin: 10px 20px;
+  /* margin: 10px 20px; */
   background-color: #fff;
 }
 

@@ -157,8 +157,8 @@ export default {
 .item-box::before {
 	border-top: 50px solid #007f26;
   border-bottom: 100px solid transparent;
-	border-left: 60vw solid #0076b2;
-	border-right: 40vw solid #00992d;
+	border-left: 864px solid #0076b2;
+	border-right: 576px solid #00992d;
   z-index: 1;
 }
 
@@ -170,6 +170,7 @@ export default {
 .card-container {
   padding: 40px 0;
   background-color: azure;
+  display: flex;
 }
 
 table {
@@ -249,6 +250,13 @@ label {
 .submitting {
   color: #FFF;
   background-color: #003C71;
+}
+
+@media screen and (max-width: 1440px) {
+  .item-box::before {
+    border-left-width: 60vw;
+    border-right-width: 40vw;
+  }
 }
 
 @media screen and (max-width: 1120px) {

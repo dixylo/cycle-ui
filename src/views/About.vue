@@ -6,62 +6,108 @@
       </div>
       <p class='page-title'>About Cycly</p>
     </div>
-    <div class='timeline-box'>
+    <div class='item-box'>
+      <p class='box-title'>Let your pleasures cycle</p>
+      <div class='card-container-background'>
+      <p class='overview'>
+        From mountains to beaches, from dirt roads to skateparks, 
+        Cycly is commited to provide high-quality cycles that meet 
+        various kinds of terrains to cyclists from all walks of life. 
+        If you start your day with a cup of coffee, why not spend the same 
+        to try our selected models and let your pleasures cycle.
+      </p>
       <div class="timeline">
         <div class="balloon left">
           <div class="content">
             <h2>2014</h2>
-            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+            <p>
+              Two young aficionados of cycling crashed into each other while cycling on the campus of Unitec to avoid a cat that was crossing the cycle lane. 
+              Without noticing their own injury, they soon recognized each other's world famous cycle brand, and decided to try it before saying goodbye. 
+              Their friendship began.
+            </p>
           </div>
         </div>
         <div class="balloon right">
           <div class="content">
             <h2>2015</h2>
-            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+            <p>
+              Graduated from Unitec at the same time, Hugh and Frank decided to found a small cycle-renting company that provides renting service to those who are crazy about cycles 
+              but are living on a tight budget like them. In the spring of this year, Cycly was born on the fringe of Unitec's Mt Albert campus in Auckland.
+            </p>
           </div>
         </div>
         <div class="balloon left">
           <div class="content">
             <h2>2016</h2>
-            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+            <p>
+              Having majored in marketing and accounting at Unitec, the two founders soon raised great awareness of their new-born cycle-renting company, 
+              and their excellent service as well as high-quality cycles had accumulated a mass of loyal fans in less than a year, who visited their store regularly and advertised for Cycly.
+            </p>
           </div>
         </div>
         <div class="balloon right">
           <div class="content">
             <h2>2017</h2>
-            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+            <p>
+              With the number of customers increasing steadily, Cycly expanded its team for the first time from only two founders to a small group of five energetic people. 
+              This small business born in a suburb of Auckland was witnessing its phenomenal growth to the leadership in this trade.
+            </p>
           </div>
         </div>
         <div class="balloon left">
           <div class="content">
             <h2>2018</h2>
-            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+            <p>
+              Being a frequent topic among cyclists in Auckland, Cycly had come to its third year. The store had virtually become a club bar on weekends. With the support of customers and fans, 
+              Cycly was enabled to increase the number and diversity of its stock and add more world top brands.
+            </p>
           </div>
         </div>
         <div class="balloon right">
           <div class="content">
             <h2>2019</h2>
-            <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>
+            <p>
+              More and more cycle lanes are now being built to mitigate deteriorating traffic congestion in Auckland. Cycly is making its own contribution not only to the mitigation, but also 
+              to the fitness and recreation of Aucklanders. Cycly is becoming part of more and more people's life, more of our story is waiting to be revealed.
+            </p>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-/* *********************** */
-/* Timeline Section Starts */
-/* *********************** */
 * {
   box-sizing: border-box;
 }
 
-.timeline-box {
-  /* background-color: #474e5d; */
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: bold;
-  color: #00284c;
+.item-box::before {
+	border-top: 40px solid #0076b2;
+  border-bottom: 60px solid transparent;
+	border-left: 432px solid #0098e5;
+	border-right: 1008px solid #0087cc;
+  z-index: 1;
+}
+
+.item-box::after {
+	width: 0;
+	height: 0;
+  bottom: 0;
+  z-index: 1;
+	border-top: 60px solid transparent;
+  border-bottom: 40px solid #007f26;
+	border-left: 1008px solid #00992d;
+	border-right: 432px solid #00b235;
+}
+
+.overview {
+  width: 90%;
+  padding-top: 0;
+  color: #003C71;
+  font-size: 30px;
+  text-align: justify;
 }
 
 /* The actual timeline (the vertical ruler) */
@@ -69,6 +115,10 @@
   position: relative;
   max-width: 1200px;
   margin: 0 auto;
+  color: #00284c;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  background-color: azure;
 }
 
 /* The actual timeline (the vertical ruler) */
@@ -124,9 +174,9 @@
   width: 0;
   z-index: 1;
   right: 30px;
-  border: medium solid white;
+  border: medium solid #f2f2f2;
   border-width: 10px 0 10px 10px;
-  border-color: transparent transparent transparent white;
+  border-color: transparent transparent transparent #f2f2f2;
 }
 
 /* Add arrows to the right balloon (pointing left) */
@@ -138,9 +188,9 @@
   width: 0;
   z-index: 1;
   left: 30px;
-  border: medium solid white;
+  border: medium solid #f2f2f2;
   border-width: 10px 10px 10px 0;
-  border-color: transparent white transparent transparent;
+  border-color: transparent #f2f2f2 transparent transparent;
 }
 
 /* Fix the circle for containers on the right side */
@@ -158,6 +208,22 @@
   box-shadow: 10px 10px 10px #000; 
 }
 
+.content p {
+  text-align: justify;
+}
+
+@media screen and (max-width: 1440px) {
+  .item-box::before {
+    border-left-width: 30vw;
+    border-right-width: 70vw;
+  }
+
+  .item-box::after {
+    border-left-width: 70vw;
+    border-right-width: 30vw;
+  }
+}
+
 @media screen and (max-width: 1024px) {
   .page-title {
     font-size: 50px;
@@ -169,13 +235,35 @@
     font-size: 40px;
   }
 
-  .timeline-box {
+  .item-box::before {
+    border-top-width: 30px;
+    border-bottom-width: 50px;
+  }
+
+  .item-box::after {
+    border-top-width: 50px;
+    border-bottom-width: 30px;
+  }
+
+  .box-title {
+    font-size: 40px;
+  }
+
+  .box-title::after {
+    font-size: 80px;
+  }
+
+  .overview {
+    font-size: 25px;
+  }
+
+  .content {
     font-size: 18px;
   }
 }
 
 @media screen and (max-width: 700px) {
-  .timeline-box {
+  .content {
     font-size: 16px;
   }
 }
@@ -184,6 +272,28 @@
 @media screen and (max-width: 600px) {
   .page-title {
     font-size: 35px;
+  }
+
+  .item-box::before {
+    border-top-width: 25px;
+    border-bottom-width: 40px;
+  }
+
+  .item-box::after {
+    border-top-width: 40px;
+    border-bottom-width: 25px;
+  }
+
+  .box-title {
+    font-size: 30px;
+  }
+
+  .box-title::after {
+    font-size: 60px;
+  }
+
+  .overview {
+    font-size: 20px;
   }
 
   /* Place the timelime to the left */
@@ -221,10 +331,32 @@
   .page-title {
     font-size: 30px;
   }
+
+  .item-box::before {
+    border-top-width: 20px;
+    border-bottom-width: 30px;
+  }
+
+  .item-box::after {
+    border-top-width: 30px;
+    border-bottom-width: 20px;
+  }
+
+  .box-title {
+    font-size: 25px;
+  }
+
+  .box-title::after {
+    font-size: 50px;
+  }
+
+  .overview {
+    font-size: 18px;
+  }
 }
 
 @media screen and (max-width: 400px) {
-  .timeline-box {
+  .content {
     font-size: 14px;
   }
 }
