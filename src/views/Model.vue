@@ -70,13 +70,18 @@
             <label for='timeToCollect'>
               Please select a date and time<br>to pick up your rental.
             </label>
-            <input
-              id='datepicker'
-              type='datetime-local'
-              name='timeToCollect'
+            <VueCtkDateTimePicker
+              class='date-time-picker'
               v-model='timeToCollect'
-              required
+              :no-value-to-custom-elem='false'
+              format='YYYY-MM-DD HH:mm'
             >
+              <input
+                class='date-time-picker-input'
+                type='text'
+                placeholder='Click here to open calendar'
+              />
+            </VueCtkDateTimePicker>
             <Button
               class='submit'
               :class="{submitting: rentalStatus === 'loading'}"
@@ -94,12 +99,15 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
+import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css';
+import moment from 'moment';
 import Skeleton from '@/components/Skeleton'
 import Button from '@/components/Button'
 
 export default {
   name: 'model',
-  components: { Skeleton, Button },
+  components: { Skeleton, Button, VueCtkDateTimePicker },
   data () {
     return {
       selectedCycleId: '',
@@ -130,10 +138,11 @@ export default {
       }
 
       const currentUser = this.getCurrentUser
+      const timeToCollect = moment(this.timeToCollect).toISOString(true).slice(0, 16)
       this.createRental({
         cycleId: this.selectedCycleId,
         userId: currentUser._id,
-        timeToCollect: this.timeToCollect
+        timeToCollect
       }).then(() =>{
         alert('You have created a new rental successfully.')
       }).catch(err => {
@@ -211,22 +220,23 @@ label {
   font-weight: bold;
 }
 
-#datepicker {
-  display: block;
-  margin: 1em auto;
-  padding: 1em;
-  color: white;
-  font-size: 30px;
+.date-time-picker {
+  width: 420px;
+  margin: 30px auto;
+}
+
+.date-time-picker-input {
+  width: 420px;
+  height: 60px;
   background-color: #0076b2;
+  text-align: center;
+  color: #fff;
+  font-size: 30px;
 }
 
-::-webkit-inner-spin-button {
-  width: 30px;
-  height: 30px;
-}
-
-::-webkit-calendar-picker-indicator:hover {
-  color: #0076b2;
+::placeholder {
+  color: azure;
+  opacity: 1;
 }
 
 .submit {
@@ -371,7 +381,13 @@ label {
     font-size: 25px;
   }
 
-  #datepicker {
+  .date-time-picker {
+    width: 350px;
+  }
+
+  .date-time-picker-input {
+    width: 350px;
+    height: 50px;
     font-size: 25px;
   }
 
@@ -419,13 +435,18 @@ label {
     font-size: 15px;
   }
 
-  #datepicker {
+  .date-time-picker {
+    width: 280px;
+  }
+
+  .date-time-picker-input {
+    width: 280px;
+    height: 40px;
     font-size: 20px;
   }
 
-  button {
+  .submit {
     font-size: 15px;
-    border-width: 2px;
   }
 }
 
@@ -442,7 +463,13 @@ label {
     font-size: 12px;
   }
 
-  #datepicker {
+  .date-time-picker {
+    width: 210px;
+  }
+
+  .date-time-picker-input {
+    width: 210px;
+    height: 30px;
     font-size: 15px;
   }  
 }

@@ -9,70 +9,70 @@
     <div class='item-box'>
       <p class='box-title'>Let your pleasures cycle</p>
       <div class='card-container-background'>
-      <p class='overview'>
-        From mountains to beaches, from dirt roads to skateparks, 
-        Cycly is commited to provide high-quality cycles that meet 
-        various kinds of terrains to cyclists from all walks of life. 
-        If you start your day with a cup of coffee, why not spend the same 
-        to try our selected models and let your pleasures cycle.
-      </p>
-      <div class="timeline">
-        <div class="balloon left">
-          <div class="content">
-            <h2>2014</h2>
-            <p>
-              Two young aficionados of cycling crashed into each other while cycling on the campus of Unitec to avoid a cat that was crossing the cycle lane. 
-              Without noticing their own injury, they soon recognized each other's world famous cycle brand, and decided to try it before saying goodbye. 
-              Their friendship began.
-            </p>
+        <p class='overview'>
+          From mountains to beaches, from dirt roads to skateparks, 
+          Cycly is commited to provide high-quality cycles that meet 
+          various kinds of terrains to cyclists from all walks of life. 
+          If you start your day with a cup of coffee, why not spend the same 
+          to try our selected models and let your pleasures cycle.
+        </p>
+        <div class="timeline">
+          <div class="balloon left">
+            <div class="content">
+              <h2>2014</h2>
+              <p>
+                Two young cycling aficionados crashed into each other while cycling on the campus of Unitec to avoid a cat that was crossing the cycle lane. 
+                Without noticing their own injury, they soon recognized each other's world famous cycle brand, and decided to try it before saying goodbye. 
+                Their friendship began.
+              </p>
+            </div>
+          </div>
+          <div class="balloon right">
+            <div class="content">
+              <h2>2015</h2>
+              <p>
+                Graduated from Unitec at the same time, Hugh and Frank decided to found a small cycle-renting company that provides renting service to those who are crazy about cycles 
+                but are living on a tight budget like them. In the spring of this year, Cycly was born on the fringe of Unitec's Mt Albert campus in Auckland.
+              </p>
+            </div>
+          </div>
+          <div class="balloon left">
+            <div class="content">
+              <h2>2016</h2>
+              <p>
+                Having majored in marketing and accounting at Unitec, the two founders soon raised great awareness of their new-born cycle-renting company, 
+                and their excellent service as well as high-quality cycles had accumulated a mass of loyal fans in less than a year, who visited their store regularly and advertised for Cycly.
+              </p>
+            </div>
+          </div>
+          <div class="balloon right">
+            <div class="content">
+              <h2>2017</h2>
+              <p>
+                With the number of customers increasing steadily, Cycly expanded its team for the first time from only two founders to a small group of five energetic people. 
+                This small business born in a suburb of Auckland was witnessing its phenomenal growth to the leadership in this trade.
+              </p>
+            </div>
+          </div>
+          <div class="balloon left">
+            <div class="content">
+              <h2>2018</h2>
+              <p>
+                Being a frequent topic among cyclists in Auckland, Cycly had come to its third year. The store had virtually become a club bar on weekends. With the support of customers and fans, 
+                Cycly was enabled to increase the quantity and diversity of its stock and add more world top brands.
+              </p>
+            </div>
+          </div>
+          <div class="balloon right">
+            <div class="content">
+              <h2>2019</h2>
+              <p>
+                More and more cycle lanes are now being built to mitigate deteriorating traffic congestion in Auckland. Cycly is making its own contribution not only to the mitigation, but also 
+                to the fitness and recreation of Aucklanders. Cycly is becoming part of more and more people's life, more of our story is waiting to be revealed.
+              </p>
+            </div>
           </div>
         </div>
-        <div class="balloon right">
-          <div class="content">
-            <h2>2015</h2>
-            <p>
-              Graduated from Unitec at the same time, Hugh and Frank decided to found a small cycle-renting company that provides renting service to those who are crazy about cycles 
-              but are living on a tight budget like them. In the spring of this year, Cycly was born on the fringe of Unitec's Mt Albert campus in Auckland.
-            </p>
-          </div>
-        </div>
-        <div class="balloon left">
-          <div class="content">
-            <h2>2016</h2>
-            <p>
-              Having majored in marketing and accounting at Unitec, the two founders soon raised great awareness of their new-born cycle-renting company, 
-              and their excellent service as well as high-quality cycles had accumulated a mass of loyal fans in less than a year, who visited their store regularly and advertised for Cycly.
-            </p>
-          </div>
-        </div>
-        <div class="balloon right">
-          <div class="content">
-            <h2>2017</h2>
-            <p>
-              With the number of customers increasing steadily, Cycly expanded its team for the first time from only two founders to a small group of five energetic people. 
-              This small business born in a suburb of Auckland was witnessing its phenomenal growth to the leadership in this trade.
-            </p>
-          </div>
-        </div>
-        <div class="balloon left">
-          <div class="content">
-            <h2>2018</h2>
-            <p>
-              Being a frequent topic among cyclists in Auckland, Cycly had come to its third year. The store had virtually become a club bar on weekends. With the support of customers and fans, 
-              Cycly was enabled to increase the number and diversity of its stock and add more world top brands.
-            </p>
-          </div>
-        </div>
-        <div class="balloon right">
-          <div class="content">
-            <h2>2019</h2>
-            <p>
-              More and more cycle lanes are now being built to mitigate deteriorating traffic congestion in Auckland. Cycly is making its own contribution not only to the mitigation, but also 
-              to the fitness and recreation of Aucklanders. Cycly is becoming part of more and more people's life, more of our story is waiting to be revealed.
-            </p>
-          </div>
-        </div>
-      </div>
       </div>
     </div>
   </div>
@@ -81,6 +81,10 @@
 <style scoped>
 * {
   box-sizing: border-box;
+}
+
+.item-box {
+  background-color: rgba(255, 255, 255, 0.90);
 }
 
 .item-box::before {
@@ -102,9 +106,12 @@
 	border-right: 432px solid #00b235;
 }
 
+.card-container-background {
+  background-color: transparent;
+}
+
 .overview {
   width: 90%;
-  padding-top: 0;
   color: #003C71;
   font-size: 30px;
   text-align: justify;
@@ -118,7 +125,6 @@
   color: #00284c;
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
-  background-color: azure;
 }
 
 /* The actual timeline (the vertical ruler) */
