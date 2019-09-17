@@ -59,8 +59,12 @@ const actions = {
         commit('rentals_success', response.data)
       })
       .catch(err => {
-        commit('rental_error')
-        console.log(err)
+        if (err.response.status === 404) {
+          commit('rentals_success', [])
+        } else {
+          commit('rental_error')
+          console.log(err)
+        }
       })
   },
   async fetchUserRentals ({ commit }, userId) {
