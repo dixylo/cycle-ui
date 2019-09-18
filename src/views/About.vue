@@ -41,7 +41,7 @@
               <h2>2016</h2>
               <p>
                 Having majored in marketing and accounting at Unitec, the two founders soon raised great awareness of their new-born cycle-renting company, 
-                and their excellent service as well as high-quality cycles had accumulated a mass of loyal fans in less than a year, who visited their store regularly and advertised for Cycly.
+                and their excellent service as well as high-quality cycles had accumulated a mass of loyal fans in less than a year, who visited their store regularly and advertised Cycly voluntarily.
               </p>
             </div>
           </div>
@@ -59,7 +59,7 @@
               <h2>2018</h2>
               <p>
                 Being a frequent topic among cyclists in Auckland, Cycly had come to its third year. The store had virtually become a club bar on weekends. With the support of customers and fans, 
-                Cycly was enabled to increase the quantity and diversity of its stock and add more world top brands.
+                Cycly was enabled to include more world top brands and increase the quantity and diversity of its stock.
               </p>
             </div>
           </div>
@@ -68,7 +68,7 @@
               <h2>2019</h2>
               <p>
                 More and more cycle lanes are now being built to mitigate deteriorating traffic congestion in Auckland. Cycly is making its own contribution not only to the mitigation, but also 
-                to the fitness and recreation of Aucklanders. Cycly is becoming part of more and more people's life, more of our story is waiting to be revealed.
+                to the fitness and recreation of Aucklanders. Becoming part of more and more people's life, Cycly will have more stories waiting to be told.
               </p>
             </div>
           </div>

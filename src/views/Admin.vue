@@ -28,6 +28,13 @@
         <div v-else>
           <Skeleton :status='status' :onReload='reload' />
         </div>
+        <Modal 
+          :visibility='isModalVisible'
+          :onOk='handleOk'
+          :onCancel='handleCancel'
+          :header='modalHeader'
+          :body='modalBody'
+        />
       </div>
     </div>
   </div>
@@ -38,16 +45,22 @@ import { mapGetters, mapActions } from 'vuex'
 import Table from '@/components/Table'
 import Skeleton from '@/components/Skeleton'
 import Button from '@/components/Button'
+import Modal from '@/components/Modal'
 
 export default {
   name: 'admin',
-  components: { Table, Skeleton, Button },
+  components: { Table, Skeleton, Button, Modal },
   created () {
     this.fetchAllRentals()
     this.fetchAllUsers()
   },
   data () {
     return {
+      isModalVisible: false,
+      handleCancel: null,
+      modalHeader: '',
+      modalBody: '',
+      modalCallback: null,
       selectedTabIndex: 0,
       tabs: [{
         text: 'Rentals',
@@ -84,7 +97,7 @@ export default {
           text: 'Rent',
           callback: this.beginRentout
         }, {
-          text: 'Return',
+          text: 'Finish',
           callback: this.completeRental
         }, {
           text: 'Delete',
@@ -160,52 +173,86 @@ export default {
           return
       }
     },
+    showModal (header, body, callback, cancel) {
+      this.modalHeader = header
+      this.modalBody = body
+      this.modalCallback = callback
+      this.handleCancel = cancel
+      this.isModalVisible = true
+    },
+    handleOk () {
+      this.isModalVisible = false
+      if (this.modalCallback) this.modalCallback()
+    },
     switchTab (index) {
       this.selectedTabIndex = index
     },
     beginRentout: function (id) {
-      const isConfirmed = window.confirm('Are you sure to start this rentout?')
-      if (!isConfirmed) return
+      const rental = this.list.find(r => r._id.toString() === id)
+      if (rental.timeRentedOut) {
+        return this.showModal('Rentout Denied', 'You cannot start a rental already started or finished.')
+      }
 
-      this.startRentout(id)
-        .then(() => alert('You have started this rentout successfully.'))
-        .catch(err => {
-          alert('Rentout failed. Please try again.')
-          console.log(err)
-        })
+      this.showModal(
+        'Start Rentout',
+        'Are you sure to start this rentout?',
+        () => this.startRentout(id)
+          .then(() => this.showModal('Rentout Started', 'You have started this rentout successfully.'))
+          .catch(err => {
+            this.showModal('Rentout Failed', 'Please try again.')
+            console.log(err)
+          }),
+        () => this.isModalVisible = false
+      )
     },
     completeRental: function (id) {
-      const isConfirmed = window.confirm('Are you sure to finish this rental?')
-      if (!isConfirmed) return
+      const rental = this.list.find(r => r._id.toString() === id)
+      if (!rental.timeRentedOut || rental.timeReturned) {
+        return this.showModal('Rental-finishing Denied', 'You cannot finish a rental not started or already finished.')
+      }
 
-      this.finishRental(id)
-        .then(() => alert('You have finished this rental successfully.'))
-        .catch(err => {
-          alert('Rental-finishing failed. Please try again.')
-          console.log(err)
-        })
+      this.showModal(
+        'Finish Rental',
+        'Are you sure to finish this rental?',
+        () => this.finishRental(id)
+          .then(() => this.showModal('Rental Finished', 'You have finished this rental successfully.'))
+          .catch(err => {
+            this.showModal('Rental-finishing Failed', 'Please try again.')
+            console.log(err)
+          }),
+        () => this.isModalVisible = false
+      )
     },
     removeRental: function (id) {
-      const isConfirmed = window.confirm('Are you sure to delete this rental?')
-      if (!isConfirmed) return
+      const rental = this.list.find(r => r._id.toString() === id)
+      if (rental.timeRentedOut && !rental.timeReturned) {
+        return this.showModal('Deletion Denied', 'You cannot delete a rental already started but not finished.')
+      }
 
-      this.deleteRental(id)
-        .then(() => alert('You have deleted this rental successfully.'))
-        .catch(err => {
-          alert('Deletion failed. Please try again.')
-          console.log(err)
-        })
+      this.showModal(
+        'Delete Rental',
+        'Are you sure to delete this rental?',
+        () => this.deleteRental(id)
+          .then(() => this.showModal('Rental Deleted', 'You have deleted this rental successfully.'))
+          .catch(err => {
+            this.showModal('Deletion Failed', 'Please try again.')
+            console.log(err)
+          }),
+        () => this.isModalVisible = false
+      )
     },
     removeUser: function (id) {
-      const isConfirmed = window.confirm('Are you sure to delete this user?')
-      if (!isConfirmed) return
-
-      this.deleteUser(id)
-        .then(() => alert('You have deleted this user successfully.'))
-        .catch(err => {
-          alert('Deletion failed. Please try again.')
-          console.log(err)
-        })
+      this.showModal(
+        'Delete User',
+        'Are you sure to delete this user?',
+        () => this.deleteUser(id)
+          .then(() => this.showModal('User Deleted', 'You have deleted this user successfully.'))
+          .catch(err => {
+            this.showModal('Deletion failed', 'Please try again.')
+            console.log(err)
+          }),
+        () => this.isModalVisible = false
+      )
     }
   }
 }
@@ -247,7 +294,7 @@ export default {
 }
 
 @media screen and (max-width: 1440px) {
-  #brand-box::before {
+  .item-box::before {
     border-left-width: 70vw;
     border-right-width: 30vw;
   }

@@ -51,6 +51,13 @@
             Refresh
           </Button>
         </div>
+        <Modal 
+          :visibility='isModalVisible'
+          :onOk='handleOk'
+          :onCancel='handleCancel'
+          :header='modalHeader'
+          :body='modalBody'
+        />
       </div>
     </div>
   </div>
@@ -60,12 +67,22 @@
 import { mapGetters, mapActions } from 'vuex'
 import Skeleton from '@/components/Skeleton'
 import Button from '@/components/Button'
+import Modal from '@/components/Modal'
 
 export default {
   name: 'rentals',
-  components: { Skeleton, Button },
+  components: { Skeleton, Button, Modal },
   created () {
     this.fetchMyRentals()
+  },
+  data () {
+    return {
+      isModalVisible: false,
+      modalHeader: '',
+      modalBody: '',
+      modalCallback: null,
+      handleCancel: null
+    }
   },
   computed: {
     ...mapGetters(['getRentals', 'rentalStatus']),
@@ -86,15 +103,28 @@ export default {
       return time.slice(0, 16).replace('T', ', ')
     },
     removeRental (id) {
-      const isConfirmed = window.confirm('Are you sure to delete this rental?')
-      if (!isConfirmed) return
-
-      this.deleteRental(id)
-        .then(() => alert('You have deleted the rental successfully.'))
-        .catch(err => {
-          alert('Deletion failed. Please try again.')
-          console.log(err)
-        })
+      this.showModal(
+        'Delete Rental',
+        'Are you sure to delete this rental?',
+        () => this.deleteRental(id)
+          .then(() => this.showModal('Rental Deleted', 'You have deleted the rental successfully.'))
+          .catch(err => {
+            this.showModal('Deletion Failed', 'Please try again.')
+            console.log(err)
+          }),
+        () => this.isModalVisible = false
+      )
+    },
+    showModal (header, body, callback, cancel) {
+      this.modalHeader = header
+      this.modalBody = body
+      this.modalCallback = callback
+      this.handleCancel = cancel
+      this.isModalVisible = true
+    },
+    handleOk () {
+      this.isModalVisible = false
+      if (this.modalCallback) this.modalCallback()
     }
   }
 }

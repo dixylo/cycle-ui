@@ -45,19 +45,30 @@
         </form>
       </div>
     </div>
+    <Modal 
+      :visibility='isModalVisible'
+      :onOk='handleOk'
+      :header='modalHeader'
+      :body='modalBody'
+    />
   </div>
 </template>
 
 <script>
 import Button from '@/components/Button'
+import Modal from '@/components/Modal'
 
 export default {
   name: 'login',
-  components: { Button },
+  components: { Button, Modal },
   data () {
     return {
       email: '',
-      password: ''
+      password: '',
+      isModalVisible: false,
+      modalHeader: '',
+      modalBody: '',
+      modalCallback: null
     }
   },
   computed: {
@@ -72,18 +83,23 @@ export default {
       
       this.$store.dispatch('login', { email, password })
         .then(() => {
-          alert('Login Successful. Redirecting to Homepage.')
-          this.$router.go(-1)
+          this.showModal(
+            'Login Successful',
+            'Now you can rent a bike or check out your previous rentals.',
+            () => this.$router.go(-1)
+          )
         })
         .catch(err => console.log(err))
     },
-    logout: function () {
-      this.$store.dispatch('logout')
-        .then(() => {
-          alert('Logout Successful. Redirecting to Login Page.')
-          this.$router.push('/login')
-        })
-        .catch(err => console.log(err))
+    showModal (header, body, callback) {
+      this.modalHeader = header
+      this.modalBody = body
+      this.modalCallback = callback
+      this.isModalVisible = true
+    },
+    handleOk () {
+      this.isModalVisible = false
+      if (this.modalCallback) this.modalCallback()
     }
   }
 }

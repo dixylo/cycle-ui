@@ -72,22 +72,33 @@
         <router-link class='link' to='/login'>Log in</router-link>
       </div>
     </div>
+    <Modal 
+      :visibility='isModalVisible'
+      :onOk='handleOk'
+      :header='modalHeader'
+      :body='modalBody'
+    />
   </div>
 </template>
 
 <script>
 import Button from '@/components/Button'
+import Modal from '@/components/Modal'
 
 export default {
   name: 'signup',
-  components: { Button },
+  components: { Button, Modal },
   data () {
     return {
       username: '',
       password: '',
       password_confirmed: '',
       email: '',
-      phone: ''
+      phone: '',
+      isModalVisible: false,
+      modalHeader: '',
+      modalBody: '',
+      modalCallback: null
     }
   },
   computed: {
@@ -97,7 +108,9 @@ export default {
   },
   methods: {
     signup: function () {
-      if (this.password !== this.password_confirmed) return alert('Inconsistent Password.')
+      if (this.password !== this.password_confirmed) {
+        return this.showModal('Inconsistent Password', 'Please confirm your password.')
+      }
 
       const data = {
         username: this.username,
@@ -108,10 +121,23 @@ export default {
 
       this.$store.dispatch('signup', data)
         .then(() => {
-          alert('Signup Successful. Redirecting to Homepage.')
-          this.$router.push('/')
+          this.showModal(
+            'Signup Successful',
+            'We are coming back to Homepage',
+            () => this.$router.push('/')
+          )
         })
         .catch(err => console.log(err))
+    },
+    showModal (header, body, callback) {
+      this.modalHeader = header
+      this.modalBody = body
+      this.modalCallback = callback
+      this.isModalVisible = true
+    },
+    handleOk () {
+      this.isModalVisible = false
+      if (this.modalCallback) this.modalCallback()
     }
   }
 }

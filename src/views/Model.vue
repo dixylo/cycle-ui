@@ -92,6 +92,12 @@
             </Button>
           </form>
         </div>
+        <Modal 
+          :visibility='isModalVisible'
+          :onOk='handleOk'
+          :header='modalHeader'
+          :body='modalBody'
+        />
       </div>
     </div>
   </div>
@@ -104,14 +110,19 @@ import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css';
 import moment from 'moment';
 import Skeleton from '@/components/Skeleton'
 import Button from '@/components/Button'
+import Modal from '@/components/Modal'
 
 export default {
   name: 'model',
-  components: { Skeleton, Button, VueCtkDateTimePicker },
+  components: { Skeleton, Button, VueCtkDateTimePicker, Modal },
   data () {
     return {
       selectedCycleId: '',
-      timeToCollect: ''
+      timeToCollect: '',
+      isModalVisible: false,
+      modalHeader: '',
+      modalBody: '',
+      modalCallback: null
     }
   },
   computed: {
@@ -133,8 +144,11 @@ export default {
     handleSubmit () {
       const isLoggedIn = this.isLoggedIn
       if (!isLoggedIn) {
-        alert('Please log in to proceed.')
-        return this.$router.push('/login')
+        return this.showModal(
+          'Permission Needed',
+          'Please log in to proceed.',
+          () => this.$router.push('/login')
+        )
       }
 
       const currentUser = this.getCurrentUser
@@ -144,11 +158,24 @@ export default {
         userId: currentUser._id,
         timeToCollect
       }).then(() =>{
-        alert('You have created a new rental successfully.')
+        this.showModal(
+          'Order Received',
+          'You have created a new rental successfully. Please check out the Contact page to learn when and where to collect your rental, or the Rentals page to find your latest rental. Please come before the time you selected to collect your rental.'
+        )
       }).catch(err => {
         console.log(err)
-        alert('Order failed. Please try again.')
+        this.showModal('Order Failed', 'Please try again.')
       })
+    },
+    showModal (header, body, callback) {
+      this.modalHeader = header
+      this.modalBody = body
+      this.modalCallback = callback
+      this.isModalVisible = true
+    },
+    handleOk () {
+      this.isModalVisible = false
+      if (this.modalCallback) this.modalCallback()
     }
   }
 }
