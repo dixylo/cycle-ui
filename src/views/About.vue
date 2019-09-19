@@ -11,7 +11,7 @@
       <div class='card-container-background'>
         <p class='overview'>
           From mountains to beaches, from dirt roads to skateparks, 
-          Cycly is commited to provide high-quality cycles that meet 
+          Cycly is commited to providing high-quality cycles that meet 
           various kinds of terrains to cyclists from all walks of life. 
           If you start your day with a cup of coffee, why not spend the same 
           to try our selected models and let your pleasures cycle.
