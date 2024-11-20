@@ -72,6 +72,42 @@
               </p>
             </div>
           </div>
+          <div class="balloon left">
+            <div class="content">
+              <h2>2020</h2>
+              <p>
+                Cycly faced unexpected challenges due to the pandemic. However, we adapted by focusing on local customers, offering flexible rental plans, and emphasizing safe, outdoor activities. 
+                Despite the difficulties, the growing interest in cycling for health and leisure helped us stay resilient and strengthen ties with our community.
+              </p>
+            </div>
+          </div>
+          <div class="balloon right">
+            <div class="content">
+              <h2>2021</h2>
+              <p>
+                Having experienced a resurgence as restrictions eased and outdoor activities gained popularity, we expanded our fleet, introduced e-bike rentals, and enhanced our online booking system 
+                to meet growing demand. With more locals and tourists embracing cycling, we saw significant growth, building on the challenges of 2020 to deliver a stronger, customer-focused service.
+              </p>
+            </div>
+          </div>
+          <div class="balloon left">
+            <div class="content">
+              <h2>2022</h2>
+              <p>
+                Focusing on sustainability, Cycly introduced eco-friendly initiatives such as solar-powered charging stations for e-bikes and partnerships with local environmental organizations. 
+                We also enhanced customer experiences with guided cycling tours and loyalty programs, solidifying our reputation as a community-oriented business.
+              </p>
+            </div>
+          </div>
+          <div class="balloon right">
+            <div class="content">
+              <h2>2023</h2>
+              <p>
+                Cycly embraced innovation by integrating smart bike technology, offering GPS-enabled rentals and app-based tracking for convenience. We expanded operations to neighboring towns 
+                and hosted community cycling events. With consistent customer growth and increasing recognition as a trusted brand, Cycly continued to thrive as a leader in local cycling solutions.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -216,6 +252,7 @@
 
 .content p {
   text-align: justify;
+  hyphens: auto;
 }
 
 @media screen and (max-width: 1440px) {

@@ -1,12 +1,17 @@
 <template>
   <div id='footer'>
-    <p>&copy;&nbsp;2019 Copyright by CYCLY&trade;. All Rights Reserved.</p>
+    <p>&copy;&nbsp;{{ currentYear }} Copyright by CYCLY&trade;. All Rights Reserved.</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Footer'
+  name: 'Footer',
+  data() {
+    return {
+      currentYear: new Date().getFullYear(),
+    };
+  },
 }
 </script>
 
